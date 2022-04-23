@@ -46,7 +46,7 @@ services:
       - "8000:80"
     volumes:
       - ./php/vhosts:/etc/apache2/sites-enabled
-      - ./:/var/www
+      - ./festinb:/var/www
     restart: always
     networks:
       - dev
