@@ -47,58 +47,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-<<<<<<< Updated upstream
-    public function getPassword(): ?string
-    {
-        return $this->password;
-    }
-
-    public function setPassword(string $password): self
-    {
-        $this->password = $password;
-
-        return $this;
-    }
-
-    public function getRoles(): ?string
-    {
-        return $this->roles;
-    }
-
-    public function setRoles(string $roles): self
-    {
-        $this->roles = $roles;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Address>
-     */
-    public function getAddress(): Collection
-    {
-        return $this->address;
-    }
-
-    public function addAddress(Address $address): self
-    {
-        if (!$this->address->contains($address)) {
-            $this->address[] = $address;
-            $address->setUserAddress($this);
-        }
-
-        return $this;
-    }
-
-    public function removeAddress(Address $address): self
-    {
-        if ($this->address->removeElement($address)) {
-            // set the owning side to null (unless already changed)
-            if ($address->getUserAddress() === $this) {
-                $address->setUserAddress(null);
-            }
-        }
-=======
     /**
      * A visual identifier that represents this user.
      *
@@ -124,36 +72,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;
->>>>>>> Stashed changes
 
         return $this;
     }
 
     /**
-<<<<<<< Updated upstream
-     * @return Collection<int, Festival>
-     */
-    public function getFestivals(): Collection
-    {
-        return $this->festivals;
-    }
-
-    public function addFestival(Festival $festival): self
-    {
-        if (!$this->festivals->contains($festival)) {
-            $this->festivals[] = $festival;
-            $festival->addClient($this);
-        }
-
-        return $this;
-    }
-
-    public function removeFestival(Festival $festival): self
-    {
-        if ($this->festivals->removeElement($festival)) {
-            $festival->removeClient($this);
-        }
-=======
      * @see PasswordAuthenticatedUserInterface
      */
     public function getPassword(): string
@@ -164,39 +87,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPassword(string $password): self
     {
         $this->password = $password;
->>>>>>> Stashed changes
 
         return $this;
     }
 
     /**
-<<<<<<< Updated upstream
-     * @return Collection<int, Reservation>
-     */
-    public function getReservations(): Collection
-    {
-        return $this->reservations;
-    }
-
-    public function addReservation(Reservation $reservation): self
-    {
-        if (!$this->reservations->contains($reservation)) {
-            $this->reservations[] = $reservation;
-            $reservation->setUserReservation($this);
-        }
-
-        return $this;
-    }
-
-    public function removeReservation(Reservation $reservation): self
-    {
-        if ($this->reservations->removeElement($reservation)) {
-            // set the owning side to null (unless already changed)
-            if ($reservation->getUserReservation() === $this) {
-                $reservation->setUserReservation(null);
-            }
-        }
-=======
      * @see UserInterface
      */
     public function eraseCredentials()
@@ -213,7 +108,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setIsVerified(bool $isVerified): self
     {
         $this->isVerified = $isVerified;
->>>>>>> Stashed changes
 
         return $this;
     }
