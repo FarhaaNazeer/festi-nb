@@ -8,6 +8,7 @@ use App\Traits\TimestampTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 #[ORM\Entity(repositoryClass: FestivalRepository::class)]
 class Festival
@@ -19,6 +20,7 @@ class Festival
     private $name;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Gedmo\Slug(fields: ['name'])]
     private $slug;
 
     #[ORM\Column(type: 'datetime')]
