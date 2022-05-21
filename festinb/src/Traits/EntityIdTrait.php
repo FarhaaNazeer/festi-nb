@@ -12,19 +12,19 @@ trait EntityIdTrait
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\Uuid]
-    #[ORM\CustomIdGenerator(class:UuidV4::class)]
-    #[ORM\GeneratedValue(strategy: "CUSTOM")]
-    #[ORM\Column(type: 'uuid', unique: true)]
-    private $uuid;
+//    #[ORM\Uuid]
+//    #[ORM\CustomIdGenerator(class:UuidV4::class)]
+//    #[ORM\GeneratedValue(strategy: "CUSTOM")]
+//    #[ORM\Column(type: 'uuid', unique: true)]
+//    private $uuid;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getUuid()
-    {
-        return $this->uuid;
-    }
+//    public function getUuid()
+//    {
+//        return $this->uuid;
+//    }
 }

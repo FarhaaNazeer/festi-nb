@@ -12,8 +12,15 @@ RUN echo "en_US.UTF-8 UTF-8" > /etc/locale.gen && \
 RUN curl -sSk https://getcomposer.org/installer | php -- --disable-tls && \
     mv composer.phar /usr/local/bin/composer
 
+#RUN apt-get install nodejs npm
+#RUN npm install -g yarn
+
 RUN docker-php-ext-configure intl
-RUN docker-php-ext-install pdo php-pgsql php-pdo_pgsql gd opcache intl zip calendar dom mbstring zip gd xsl
+RUN apt-get install -y libpq-dev \
+    && docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
+    && docker-php-ext-install pdo pdo_pgsql pgsql
+
+RUN docker-php-ext-install gd opcache intl zip calendar dom mbstring zip gd xsl
 RUN pecl install apcu && docker-php-ext-enable apcu
 
 WORKDIR /var/www/
