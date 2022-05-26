@@ -7,24 +7,39 @@ use Symfony\Component\Uid\UuidV4;
 
 trait EntityIdTrait
 {
+    #[ORM\CustomIdGenerator(class:UuidV4::class)]
+    #[ORM\GeneratedValue(strategy: "CUSTOM")]
+    #[ORM\Column(type: 'uuid', unique: true)]
+    private $uuid;
+
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
     private $id;
 
-//    #[ORM\Uuid]
-//    #[ORM\CustomIdGenerator(class:UuidV4::class)]
-//    #[ORM\GeneratedValue(strategy: "CUSTOM")]
-//    #[ORM\Column(type: 'uuid', unique: true)]
-//    private $uuid;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-//    public function getUuid()
-//    {
-//        return $this->uuid;
-//    }
+    /**
+     * @return string|null
+     */
+    public function getUuid()
+    {
+        return $this->uuid;
+    }
+
+    /**
+     * @param $uuid
+     *
+     * @return EntityIdTrait
+     */
+    public function setUuid($uuid): self
+    {
+        $this->uuid = $uuid;
+        return $this;
+    }
 }
