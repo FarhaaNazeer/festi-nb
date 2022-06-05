@@ -1,7 +1,16 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    {{ form_start(form) }}
-    <input type="submit" value="Enregistrer">
-    {{ form_end(form) }}
+    <div class="container">
+        <h1>Ajout d'un nouveau festival</h1>
+        {{ form_start(form) }}
+        {{ form_row(form.name) }}
+        {{ form_row(form.begin_at) }}
+        {{ form_row(form.end_at) }}
+        {{ form_row(form.short_description) }}
+        {{ form_row(form.description) }}
+        {{ form_row(form.imageFile) }}
+        <input type="submit" class="btn btn-primary" value="Enregistrer">
+        {{ form_end(form) }}
+    </div>
 {% endblock %}
