@@ -3,15 +3,13 @@
 {% block title %}Log in!{% endblock %}
 
 {% block javascripts %}
-    {{ parent() }}
-    <script src="https://accounts.google.com/gsi/client" async defer></script>
-    
+
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+{{ parent() }}
+
 {% endblock %}
 
 {% block body %}
-
-   
-
     <form method="post">
         {% if error %}
             <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -44,25 +42,12 @@
             </div>
         #}
 
+        {# Login button #}
         <button class="btn btn-lg btn-primary" type="submit">
             Sign in
         </button>
 
-       
-
-          <div id="g_id_onload"
-         data-client_id="714449132704-vq2rndrmrocmkh8ps846lv5lmqb3kh96.apps.googleusercontent.com"
-         data-login_uri="http://localhost:8000/login"
-         data-auto_prompt="false">
-      </div>
-
-      <div class="g_id_signin"
-         data-type="standard"
-         data-size="large"
-         data-theme="outline"
-         data-text="sign_in_with"
-         data-shape="rectangular"
-         data-logo_alignment="left">
-      </div>
+        {# Google button#}
+        <div id="buttonDiv"></div>
     </form>
 {% endblock %}

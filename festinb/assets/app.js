@@ -13,4 +13,6 @@ import { Tooltip, Toast, Popover } from 'bootstrap';
 // start the Stimulus application
 import './bootstrap';
 
+import Routing from '/public/bundles/fosjsrouting/js/router.min.js';
+
 import './test.js';
