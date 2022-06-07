@@ -1,20 +1,36 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}FestiNB | Homepage {% endblock %}
 
-{% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('homepage_slider_scss') }}
+    {{ encore_entry_link_tags('homepage_search_bar_scss') }}
+{% endblock %}
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/var/www/src/Controller/HomeController.php'|file_link(0) }}">src/Controller/HomeController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/var/www/templates/home/index.html.twig'|file_link(0) }}">templates/home/index.html.twig</a></code></li>
-    </ul>
-</div>
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('homepage_slider_js') }}
+{% endblock %}
+{% block content %}
+    {% macro searchBar() %}
+        <div class="search-bar">
+            <h2>Recherche ton festival</h2>
+            <div class="search-bar__inputs">
+                <input type="text" class="input input__small search-bar__input" placeholder="Ville">
+                <input type="text" class="input input__small search-bar__input" placeholder="Date de début">
+                <input type="text" class="input input__small search-bar__input" placeholder="Date de fin">
+                <input type="submit" value="Go!" class="btn btn__small">
+            </div>
+        </div>
+    {% endmacro %}
+    <div class="swiper js-homepage-slider">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide swiper-slide__first">{{ _self.searchBar() }}</div>
+            <div class="swiper-slide swiper-slide__second">{{ _self.searchBar() }}</div>
+            <div class="swiper-slide swiper-slide__third">{{ _self.searchBar() }}</div>
+        </div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+    </div>
 {% endblock %}
