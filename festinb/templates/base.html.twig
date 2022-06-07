@@ -3,6 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="google-signin-client_id" content="714449132704-vq2rndrmrocmkh8ps846lv5lmqb3kh96.apps.googleusercontent.com">
         <title>{% block title %}Welcome!{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
         {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
@@ -11,6 +12,7 @@
         {% endblock %}
 
         {% block javascripts %}
+            <script src="https://apis.google.com/js/platform.js" async defer></script>
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
     </head>
