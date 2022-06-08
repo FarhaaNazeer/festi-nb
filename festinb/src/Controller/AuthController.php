@@ -11,11 +11,24 @@ use Symfony\Component\Routing\Annotation\Route;
 class AuthController extends AbstractController
 {
     #[Route('/auth/google', name: 'app_auth_google', options: ['expose'=> true])]
-    public function index(Request $request): Response
+    public function index(Request $request) : ?Response
     {
-        dd($request);
-        return $this->render('auth/index.html.twig', [
-            'controller_name' => 'AuthController',
-        ]);
+        $payload = json_decode($request->getContent(), true);
+        $client_id  = $payload['client_id'];
+        $credential = $payload['credential'];
+
+        $client = new \Google_Client(['client_id' => $client_id]);
+
+        if (null !== $credential) {
+            $verifyIdToken = $client->verifyIdToken($credential);
+            if ($verifyIdToken) {
+                return new Response(
+                    json_encode($verifyIdToken),
+                    Response::HTTP_OK
+                );
+            }
+        }
+
+        return null;
     }
 }

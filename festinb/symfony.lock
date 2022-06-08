@@ -684,7 +684,7 @@
             "ref": "642c9239e1c76e037f5b65446d09eba836ea147f"
         },
         "files": [
-            "assets/app.js",
+            "assets/js/app.js",
             "assets/bootstrap.js",
             "assets/controllers.json",
             "assets/controllers/hello_controller.js",
