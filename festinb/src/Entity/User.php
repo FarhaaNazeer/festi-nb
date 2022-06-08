@@ -53,6 +53,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'boolean')]
     private $isVerified = false;
 
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $googleId;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $hostDomain;
+
 
     public function __construct()
     {
@@ -251,6 +257,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setIsVerified(bool $isVerified): self
     {
         $this->isVerified = $isVerified;
+
+        return $this;
+    }
+
+    public function getGoogleId(): ?string
+    {
+        return $this->googleId;
+    }
+
+    public function setGoogleId(?string $googleId): self
+    {
+        $this->googleId = $googleId;
+
+        return $this;
+    }
+
+    public function getHostDomain(): ?string
+    {
+        return $this->hostDomain;
+    }
+
+    public function setHostDomain(?string $hostDomain): self
+    {
+        $this->hostDomain = $hostDomain;
 
         return $this;
     }
