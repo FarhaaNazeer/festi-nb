@@ -8,6 +8,7 @@ use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
 use League\OAuth2\Client\Provider\ResourceOwnerInterface;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
@@ -20,7 +21,7 @@ use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
  */
 class UserRepository extends ServiceEntityRepository implements PasswordUpgraderInterface
 {
-    public function __construct(ManagerRegistry $registry)
+    public function __construct(ManagerRegistry $registry, private UserPasswordHasherInterface $userPasswordHasher)
     {
         parent::__construct($registry, User::class);
     }
@@ -79,7 +80,8 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
                 ->setFirstname($owner->getName())
                 ->setLastname($owner->getName())
                 ->setEmail($owner->getEmail())
-                ->setPassword(uniqid());
+                ->setPassword($this->userPasswordHasher->hashPassword($user, uniqid()))
+                ->setHostDomain('google');
 
             $em = $this->getEntityManager();
             $em->persist($user);
