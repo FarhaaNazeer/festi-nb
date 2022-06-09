@@ -10,12 +10,8 @@ use Doctrine\ORM\Event\LifecycleEventArgs;
 class UuidGenerator implements EventSubscriber
 {
 
-    private $generator;
-
-    public function __construct(UuidGeneratorV4 $uuidGenerator) {
-
-        $this->generator = $uuidGenerator;
-    }
+    public function __construct(private UuidGeneratorV4 $uuidGenerator)
+    {}
 
     public function getSubscribedEvents()
     {
@@ -38,9 +34,14 @@ class UuidGenerator implements EventSubscriber
         }
 
         if (empty($entity->getUuid()) && ($em = $args->getObjectManager()) instanceof EntityManager){
-            $entity->setUuid($this->generator->generate($em, $entity));
+            $entity->setUuid($this->uuidGenerator->generate($em, $entity));
         }
 
+        return true;
+    }
+
+    public function isPostInsertGenerator() : bool
+    {
         return true;
     }
 }

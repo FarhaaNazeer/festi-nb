@@ -3,12 +3,9 @@
 namespace App\Traits;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Uid\UuidV4;
 
 trait EntityIdTrait
 {
-    #[ORM\CustomIdGenerator(class:UuidV4::class)]
-    #[ORM\GeneratedValue(strategy: "CUSTOM")]
     #[ORM\Column(type: 'uuid', unique: true)]
     private $uuid;
 
