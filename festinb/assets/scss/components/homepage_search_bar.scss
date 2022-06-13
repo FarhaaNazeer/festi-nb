@@ -1,0 +1,31 @@
+@import '../abstracts/_variables.scss';
+
+
+.search-bar
+{
+  background: rgba(0,0,0,0.6);
+  padding: 3em 7em;
+  border-radius: 0.3em;
+  color: $white;
+  width: 50%;
+
+  @media all and (max-width: 768px ) {
+    //height: 100%;
+    padding: 2em 3.5em;
+  }
+
+  &__inputs {
+    @media all and (max-width: 768px ) {
+      display: flex;
+      flex-direction: column;
+      margin: 1em 0em;
+    }
+  }
+
+  &__input
+  {
+    @media all and (max-width: 768px) {
+      margin: 1em 0;
+    }
+  }
+}

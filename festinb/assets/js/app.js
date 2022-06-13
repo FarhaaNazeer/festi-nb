@@ -6,9 +6,10 @@
  */
 
 // any CSS you import will output into a single css file (app.scss in this case)
-import './scss/app.scss';
+import '../scss/app.scss';
+import './components/layouts/navbar';
 
-import { Tooltip, Toast, Popover } from 'bootstrap';
+// import { Tooltip, Toast, Popover } from 'bootstrap';
 
 // start the Stimulus application
-import './bootstrap';
+// import '../bootstrap';
