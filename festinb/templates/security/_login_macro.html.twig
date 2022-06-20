@@ -1,0 +1,25 @@
+{#<div class="login--title">Connexion</div>#}
+<form method="post">
+    <div class="form__row">
+        <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form__input" autocomplete="email" placeholder="Email" required autofocus>
+    </div>
+    <div class="form__row">
+        <input type="password" name="password" id="inputPassword" class="form__input" autocomplete="current-password" placeholder="Mot de passe" required>
+    </div>
+
+    <div class="login--form__forgot-password"><a href="#">Mot de passe oublié ?</a></div>
+
+    <div class="form__row">
+        <button class="btn btn--large btn--white btn--orange-gradient" type="submit">Connexion</button>
+    </div>
+
+    <div class="login--form__signup-btn">Pas encore inscrit ? <a href="#">Je m'inscris</a> </div>
+
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+    <div class="login--form__icons">
+        <a href="{{ path('app_google_connect') }}" class="btn-text">
+            <img class="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"/>
+        </a>
+    </div>
+</form>

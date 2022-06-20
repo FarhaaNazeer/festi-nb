@@ -1,0 +1,10 @@
+{#{% use 'form_div_layout.html.twig' %}#}
+
+{% block form_row %}
+    <div class="form__row">
+        {{- form_label(form) -}}
+        {{- form_widget(form) -}}
+        {{- form_errors(form) -}}
+        {{- form_help(form) -}}
+    </div>
+{% endblock %}
