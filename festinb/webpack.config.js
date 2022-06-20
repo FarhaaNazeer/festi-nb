@@ -23,11 +23,14 @@ Encore
     .addEntry('app', './assets/js/app.js')
     // JS Entry
     .addEntry('homepage_slider_js', './assets/js/components/homepage_slider.js')
+    .addEntry('login_js', './assets/js/pages/_login.js')
 
 
     //SCSS Entry
-    .addStyleEntry('homepage_slider_scss', './assets/scss/components/homepage_slider.scss')
-    .addStyleEntry('homepage_search_bar_scss', './assets/scss/components/homepage_search_bar.scss')
+    .addStyleEntry('homepage_slider_scss', './assets/scss/components/_homepage_slider.scss')
+    .addStyleEntry('homepage_search_bar_scss', './assets/scss/components/_homepage_search_bar.scss')
+    .addStyleEntry('login_scss', './assets/scss/pages/_login.scss')
+    .addStyleEntry('register_scss', './assets/scss/pages/_register.scss')
 
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
     .enableStimulusBridge('./assets/controllers.json')
