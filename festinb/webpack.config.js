@@ -29,8 +29,11 @@ Encore
     //SCSS Entry
     .addStyleEntry('homepage_slider_scss', './assets/scss/components/_homepage_slider.scss')
     .addStyleEntry('homepage_search_bar_scss', './assets/scss/components/_homepage_search_bar.scss')
+    .addStyleEntry('filters_scss', './assets/scss/components/_filters.scss')
     .addStyleEntry('login_scss', './assets/scss/pages/_login.scss')
     .addStyleEntry('register_scss', './assets/scss/pages/_register.scss')
+    .addStyleEntry('festivals_scss', './assets/scss/pages/_festivals.scss')
+
 
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
     .enableStimulusBridge('./assets/controllers.json')
