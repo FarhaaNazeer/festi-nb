@@ -10,3 +10,14 @@ body {
 a {
   text-decoration: none;
 }
+
+.useful-width
+{
+  margin: 0 auto;
+  max-width: 124rem;
+  padding: 0 10rem;
+
+  @media all and (max-width: 768px) {
+    padding: 0 2rem;
+  }
+}
