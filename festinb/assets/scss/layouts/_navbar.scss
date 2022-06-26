@@ -13,7 +13,17 @@
 
   &__logo {
     @media all and (max-width: 480px ) {
-      width: 100% ;
+      width: 100%;
+      text-align: center;
+    }
+    width: 10%;
+
+    img {
+      width: 55%;
+
+      @media all and (max-width: 480px ) {
+        width: 25%;
+      }
     }
   }
 

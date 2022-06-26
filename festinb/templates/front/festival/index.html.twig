@@ -28,6 +28,7 @@
                         </div>
                     </div>
                     <div class="festivals__items">
+                        {% for festival in festivals %}
                         <div class="festivals__item">
                             <div class="festival__block">
                                 <div class="festival__header">
@@ -36,9 +37,9 @@
                                     </a>
                                 </div>
                                 <div class="festival__body">
-                                    <div class="festival__body--title">Solidays 2022</div>
-                                    <div class="festival__body--subtitle">Hippodrome de Longchamps, Paris | 24-26 Juin 2022</div>
-                                    <div class="festival__body--description">Artistes : Niska, Rema, Aya Nakamura, SCH</div>
+                                    <div class="festival__body--title">{{ festival.name }}</div>
+                                    <div class="festival__body--subtitle">{{ festival.shortDescription }}</div>
+                                    <div class="festival__body--description">{{ festival.description }}</div>
                                 </div>
                                 <div class="festival__footer">
                                     <div class="festival__footer--price">A partir de : 99.00€</div>
@@ -47,101 +48,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="festivals__item">
-                            <div class="festival__block">
-                                <div class="festival__header">
-                                    <a href="">
-                                        <img src="https://images.unsplash.com/photo-1578850141295-7fb35c301da6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="">
-                                    </a>
-                                </div>
-                                <div class="festival__body">
-                                    <div class="festival__body--title">Solidays 2022</div>
-                                    <div class="festival__body--subtitle">Hippodrome de Longchamps, Paris | 24-26 Juin 2022</div>
-                                    <div class="festival__body--description">Artistes : Niska, Rema, Aya Nakamura, SCH</div>
-                                </div>
-                                <div class="festival__footer">
-                                    <div class="festival__footer--price">A partir de : 99.00€</div>
-                                    <div class="festival__footer--booking">Réserver</div>
-                                    <i class="fa-solid fa-arrow-right"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="festivals__item">
-                            <div class="festival__block">
-                                <div class="festival__header">
-                                    <a href="">
-                                        <img src="https://images.unsplash.com/photo-1578850141295-7fb35c301da6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="">
-                                    </a>
-                                </div>
-                                <div class="festival__body">
-                                    <div class="festival__body--title">Solidays 2022</div>
-                                    <div class="festival__body--subtitle">Hippodrome de Longchamps, Paris | 24-26 Juin 2022</div>
-                                    <div class="festival__body--description">Artistes : Niska, Rema, Aya Nakamura, SCH</div>
-                                </div>
-                                <div class="festival__footer">
-                                    <div class="festival__footer--price">A partir de : 99.00€</div>
-                                    <div class="festival__footer--booking">Réserver</div>
-                                    <i class="fa-solid fa-arrow-right"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="festivals__item">
-                            <div class="festival__block">
-                                <div class="festival__header">
-                                    <a href="">
-                                        <img src="https://images.unsplash.com/photo-1578850141295-7fb35c301da6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="">
-                                    </a>
-                                </div>
-                                <div class="festival__body">
-                                    <div class="festival__body--title">Solidays 2022</div>
-                                    <div class="festival__body--subtitle">Hippodrome de Longchamps, Paris | 24-26 Juin 2022</div>
-                                    <div class="festival__body--description">Artistes : Niska, Rema, Aya Nakamura, SCH</div>
-                                </div>
-                                <div class="festival__footer">
-                                    <div class="festival__footer--price">A partir de : 99.00€</div>
-                                    <div class="festival__footer--booking">Réserver</div>
-                                    <i class="fa-solid fa-arrow-right"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="festivals__item">
-                            <div class="festival__block">
-                                <div class="festival__header">
-                                    <a href="">
-                                        <img src="https://images.unsplash.com/photo-1578850141295-7fb35c301da6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="">
-                                    </a>
-                                </div>
-                                <div class="festival__body">
-                                    <div class="festival__body--title">Solidays 2022</div>
-                                    <div class="festival__body--subtitle">Hippodrome de Longchamps, Paris | 24-26 Juin 2022</div>
-                                    <div class="festival__body--description">Artistes : Niska, Rema, Aya Nakamura, SCH</div>
-                                </div>
-                                <div class="festival__footer">
-                                    <div class="festival__footer--price">A partir de : 99.00€</div>
-                                    <div class="festival__footer--booking">Réserver</div>
-                                    <i class="fa-solid fa-arrow-right"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="festivals__item">
-                            <div class="festival__block">
-                                <div class="festival__header">
-                                    <a href="">
-                                        <img src="https://images.unsplash.com/photo-1578850141295-7fb35c301da6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="">
-                                    </a>
-                                </div>
-                                <div class="festival__body">
-                                    <div class="festival__body--title">Solidays 2022</div>
-                                    <div class="festival__body--subtitle">Hippodrome de Longchamps, Paris | 24-26 Juin 2022</div>
-                                    <div class="festival__body--description">Artistes : Niska, Rema, Aya Nakamura, SCH</div>
-                                </div>
-                                <div class="festival__footer">
-                                    <div class="festival__footer--price">A partir de : 99.00€</div>
-                                    <div class="festival__footer--booking">Réserver</div>
-                                    <i class="fa-solid fa-arrow-right"></i>
-                                </div>
-                            </div>
-                        </div>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
