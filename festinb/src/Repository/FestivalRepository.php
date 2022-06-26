@@ -46,7 +46,7 @@ class FestivalRepository extends ServiceEntityRepository
     }
 
     // /**
-    //  * @return Festival[] Returns an array of Festival objects
+    //  * @return FestivalFixtures[] Returns an array of FestivalFixtures objects
     //  */
     /*
     public function findByExampleField($value)
@@ -63,7 +63,7 @@ class FestivalRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Festival
+    public function findOneBySomeField($value): ?FestivalFixtures
     {
         return $this->createQueryBuilder('f')
             ->andWhere('f.exampleField = :val')
