@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Back;
 
 use App\Entity\Festival;
 use App\Form\FestivalType;
@@ -32,10 +32,10 @@ class FestivalController extends AbstractController
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
-               $manager->persist($festival);
-               $manager->flush();
+                $manager->persist($festival);
+                $manager->flush();
 
-               $this->redirectToRoute('app_festival_add');
+                $this->redirectToRoute('app_festival_add');
             }
         }
 
