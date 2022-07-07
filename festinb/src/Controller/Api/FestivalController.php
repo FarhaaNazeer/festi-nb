@@ -21,10 +21,10 @@ class FestivalController extends AbstractController
         private FestivalRepository $repository,
         private SerializerInterface $serializer,
         private  EntityManagerInterface $entityManager
-    )
-    {}
+    ) {
+    }
 
-    #[Route('/api/festivals', name: 'festivals', methods: ['GET'])]
+    #[Route('/festivals', name: 'festivals', methods: ['GET'])]
     public function getFestivals(): JsonResponse
     {
         $festivals = $this->repository->findAll();
@@ -38,7 +38,7 @@ class FestivalController extends AbstractController
         ]);
     }
 
-    #[Route('/api/festivals/{id}', name: 'detailFestival', methods: ['GET'])]
+    #[Route('/festivals/{id}', name: 'detailFestival', methods: ['GET'])]
     public function getFestival(Festival $festival): JsonResponse
     {
         $festival = $this->serializer->serialize($festival, JsonEncoder::FORMAT);
@@ -51,7 +51,7 @@ class FestivalController extends AbstractController
         ]);
     }
 
-    #[Route('/api/festivals', name: 'createFestival', methods: ['POST'])]
+    #[Route('/festivals', name: 'createFestival', methods: ['POST'])]
     public function createFestival(Request $request, UrlGeneratorInterface $urlGenerator): JsonResponse
     {
         $festival = $this->serializer->deserialize($request->getContent(), Festival::class, 'json');
@@ -71,7 +71,7 @@ class FestivalController extends AbstractController
     }
 
 
-    #[Route('/api/festivals/{id}', name: 'createFestival', methods: ['PUT'])]
+    #[Route('/festivals/{id}', name: 'createFestival', methods: ['PUT'])]
     public function updateFestival(Request $request, Festival $festival): JsonResponse
     {
         $updateFestival = $this->serializer->deserialize($request->getContent(), Festival::class, 'json', [AbstractNormalizer::OBJECT_TO_POPULATE]);
@@ -85,7 +85,7 @@ class FestivalController extends AbstractController
     }
 
 
-    #[Route('/api/festivals/{id}', name: 'deleteFestival', methods: ['DELETE'])]
+    #[Route('/festivals/{id}', name: 'deleteFestival', methods: ['DELETE'])]
     public function deleteFestival(Festival $festival): JsonResponse
     {
         $this->entityManager->remove($festival);

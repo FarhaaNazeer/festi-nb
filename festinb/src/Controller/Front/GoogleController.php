@@ -10,13 +10,13 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class GoogleController extends AbstractController
 {
-    #[Route(path: '/google/connect', name: 'app_google_connect')]
+    #[Route(path: '/google/connect', name: 'google_connect')]
     public function googleConnect(ClientRegistry $clientRegistry): RedirectResponse
     {
         return $clientRegistry->getClient('google')->redirect([], []);
     }
 
-    #[Route(path: 'check/google/connect', name: 'app_check_google_connect')]
+    #[Route(path: 'check/google/connect', name: 'check_google_connect')]
     public function checkGoogleConnect(Request $request)
     {
         //        dd($request);
