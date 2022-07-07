@@ -6,13 +6,16 @@
     {{ parent() }}
     {{ encore_entry_link_tags('festivals_scss') }}
     {{ encore_entry_link_tags('filters_scss') }}
+    {{ encore_entry_link_tags('festival_card_scss') }}
 {% endblock %}
 
 
 {% block content %}
     <div class="content">
         <div class="festivals">
-            <h1 class="festivals__title">Tous les festivals</h1>
+{#            <h1 class="festivals__title">Tous les festivals</h1>#}
+            {% set image =  "https://images.unsplash.com/photo-1510673398445-94f476ef2cbc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1172&q=80" %}
+            {% include 'components/festival/banner_title.html.twig' with {'title' : 'Tous les festivals', 'image' : image } %}
             <div class="useful-width">
                 <div class="festivals__container">
                     <div class="festivals__header">
@@ -38,12 +41,12 @@
                                 </div>
                                 <div class="festival__body">
                                     <div class="festival__body--title">{{ festival.name }}</div>
-                                    <div class="festival__body--subtitle">{{ festival.shortDescription }}</div>
-                                    <div class="festival__body--description">{{ festival.description }}</div>
+                                    <div class="festival__body--subtitle">{{ festival.city }} , {{ festival.country }} | {{ festival.beginAt|date('d') }}-{{ festival.endAt|date('d') }}/{{ festival.endAt|date('m') }}/{{ festival.endAt|date('Y') }}</div>
+{#                                    <div class="festival__body--description">{{ festival.description }}</div>#}
                                 </div>
                                 <div class="festival__footer">
                                     <div class="festival__footer--price">A partir de : 99.00€</div>
-                                    <div class="festival__footer--booking">Réserver</div>
+                                    <div class="festival__footer--booking"><a href="{{ path('app_front_festival', { 'slug' : festival.slug }) }}">Réserver</a></div>
                                     <i class="fa-solid fa-arrow-right"></i>
                                 </div>
                             </div>

@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Festinb | Festival {{ festival.name }}{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('festivals_scss') }}
+    {{ encore_entry_link_tags('festival_scss') }}
+{% endblock %}
+
+{% block content %}
+    {% include 'components/festival/banner_title.html.twig' with {'title' : festival.name, 'image' : festival.image } %}
+    <div class="useful-width">
+        <div class="festival__container">
+            <div class="festival__navigation">
+                <section class="festival__section">
+                    <h2 class="festival__section--title">Informations</h2>
+                    <ul class="festival__section--text">
+                        <li>{{ festival.beginAt|date('d/m') }} au {{ festival.endAt|date('d/m/Y') }}</li>
+                        <li>{{ festival.city }} | {{ festival.country }}</li>
+                        <li></li>
+                    </ul>
+                </section>
+                <section class="festival__section">
+                    <h2 class="festival__section--title">Description</h2>
+                    <p class="festival__section--text"> {{ festival.description }}</p>
+                </section>
+                <form action="{{ path('app_front_festival', {'slug' : festival.slug}) }}" method="post">
+                    <section class="festival__section">
+                        <h2 class="festival__section--title">FestiPass</h2>
+                        <div class="festival__section--text">
+                            <div class="festival__cards">
+                                <img src="https://images.unsplash.com/photo-1513151233558-d860c5398176?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="">
+                                <div class="festival__cards--description">
+                                    <h3 class="festival__cards--title">Pass Jour</h3>
+                                    <div class="festival__cards--subtitle">22 au 24 juillet 2022</div>
+                                    <div class="festival__cards--quantity">
+                                            <input type="number" name="quantity" id="quantity" value="0" min="0">
+                                    </div>
+                                    <div class="festival__cards--artists">
+                                        <ul>
+                                            <li>Niska</li>
+                                            <li>Shay</li>
+                                            <li>SCH</li>
+                                            <li>Ninho</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <button type="submit" class="festival__cards--add-to-cart">Réserver</button>
+                            </div>
+                        </div>
+                    </section>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

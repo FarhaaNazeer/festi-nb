@@ -38,8 +38,8 @@ class FestivalController extends AbstractController
         ]);
     }
 
-    #[Route('/api/festivals/{id}', name: 'detailFestival', methods: ['GET'])]
-    public function getFestival(Festival $festival): JsonResponse
+    #[Route('/api/festivals/{slug}', name: 'detailFestival', methods: ['GET'])]
+    public function getFestivalBySlug(Festival $festival): JsonResponse
     {
         $festival = $this->serializer->serialize($festival, JsonEncoder::FORMAT);
 

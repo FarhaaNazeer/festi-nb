@@ -1,0 +1,67 @@
+@import '../abstracts/_variables.scss';
+
+.festival {
+
+  &__block {
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+  }
+
+  &__header {
+
+    img {
+      width: 100%;
+    }
+  }
+
+  &__body,
+  &__footer {
+    padding: 0em 1em;
+  }
+
+  &__body {
+
+    margin-top: 1em;
+
+    &--title {
+      font-weight: 700;
+    }
+
+    &--subtitle {
+      font-size: 0.8em;
+      margin-top: 0.3em;
+    }
+
+    &--description {
+      font-size: 0.7em;
+      color: $middlegrey;
+    }
+  }
+
+  &__footer {
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1.3em;
+    padding-bottom: 1.5em;
+
+    &--price,
+    &--booking {
+      font-size: 0.8em;
+      font-weight: 700;
+    }
+
+    &--price {
+      color: $sunyellow;
+    }
+
+    a {
+      color: $black;
+    }
+
+    a:hover {
+      text-decoration: underline;
+      border-bottom-color: $sunyellow;
+    }
+  }
+}
