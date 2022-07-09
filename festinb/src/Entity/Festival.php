@@ -45,10 +45,20 @@ class Festival
     #[ORM\OneToMany(mappedBy: 'festival', targetEntity: Pass::class)]
     private $passes;
 
+    #[ORM\Column(type: 'string', length: 255)]
+    private $city;
+
+    #[ORM\Column(type: 'string', length: 255)]
+    private $country;
+
+    #[ORM\OneToMany(mappedBy: 'festival', targetEntity: Ticket::class)]
+    private $ticket;
+
     public function __construct()
     {
         $this->client = new ArrayCollection();
         $this->passes = new ArrayCollection();
+        $this->ticket = new ArrayCollection();
     }
 
     public function getName(): ?string
@@ -171,6 +181,60 @@ class Festival
             // set the owning side to null (unless already changed)
             if ($pass->getFestival() === $this) {
                 $pass->setFestival(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getCity(): ?string
+    {
+        return $this->city;
+    }
+
+    public function setCity(string $city): self
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    public function getCountry(): ?string
+    {
+        return $this->country;
+    }
+
+    public function setCountry(string $country): self
+    {
+        $this->country = $country;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Ticket>
+     */
+    public function getTicket(): Collection
+    {
+        return $this->ticket;
+    }
+
+    public function addTicket(Ticket $ticket): self
+    {
+        if (!$this->ticket->contains($ticket)) {
+            $this->ticket[] = $ticket;
+            $ticket->setFestival($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTicket(Ticket $ticket): self
+    {
+        if ($this->ticket->removeElement($ticket)) {
+            // set the owning side to null (unless already changed)
+            if ($ticket->getFestival() === $this) {
+                $ticket->setFestival(null);
             }
         }
 
