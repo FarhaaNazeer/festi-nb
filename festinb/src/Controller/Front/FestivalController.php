@@ -12,7 +12,7 @@ class FestivalController extends AbstractController
     public function __construct(private FestivalManager $manager)
     {}
 
-    #[Route('/festivals', name: 'app_front_festivals')]
+    #[Route('/festivals', name: 'festivals')]
     public function index(): Response
     {
         $festivals = $this->manager->findAll();
@@ -31,5 +31,4 @@ class FestivalController extends AbstractController
             'festival' => $festival
         ]);
     }
-
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Back;
 
 use App\Entity\Festival;
 use App\Form\FestivalType;
@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class FestivalController extends AbstractController
 {
-    #[Route('/festival', name: 'app_festival')]
+    #[Route('/festival', name: 'festival')]
     public function index(): Response
     {
         return $this->render('festival/index.html.twig', [
@@ -20,7 +20,7 @@ class FestivalController extends AbstractController
         ]);
     }
 
-    #[Route('/festival/add', name: 'app_festival_add')]
+    #[Route('/festival/add', name: 'festival_add')]
     public function add(Request $request, ManagerRegistry $doctrine): Response
     {
         $festival = new Festival();
@@ -32,10 +32,10 @@ class FestivalController extends AbstractController
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
-               $manager->persist($festival);
-               $manager->flush();
+                $manager->persist($festival);
+                $manager->flush();
 
-               $this->redirectToRoute('app_festival_add');
+                $this->redirectToRoute('festival_add');
             }
         }
 
