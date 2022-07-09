@@ -25,32 +25,32 @@
                     <h2 class="festival__section--title">Description</h2>
                     <p class="festival__section--text"> {{ festival.description }}</p>
                 </section>
-                <form action="{{ path('app_front_festival', {'slug' : festival.slug}) }}" method="post">
-                    <section class="festival__section">
-                        <h2 class="festival__section--title">FestiPass</h2>
-                        <div class="festival__section--text">
-                            <div class="festival__cards">
-                                <img src="https://images.unsplash.com/photo-1513151233558-d860c5398176?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="">
-                                <div class="festival__cards--description">
-                                    <h3 class="festival__cards--title">Pass Jour</h3>
-                                    <div class="festival__cards--subtitle">22 au 24 juillet 2022</div>
-                                    <div class="festival__cards--quantity">
-                                            <input type="number" name="quantity" id="quantity" value="0" min="0">
-                                    </div>
-                                    <div class="festival__cards--artists">
-                                        <ul>
-                                            <li>Niska</li>
-                                            <li>Shay</li>
-                                            <li>SCH</li>
-                                            <li>Ninho</li>
-                                        </ul>
-                                    </div>
+                <section class="festival__section">
+                    <h2 class="festival__section--title">FestiPass</h2>
+                    <div class="festival__section--text">
+                        <div class="festival__card">
+                            <img src="https://images.unsplash.com/photo-1513151233558-d860c5398176?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="">
+                            <div class="festival__card--description">
+                                <h3 class="festival__card--title">Pass Jour</h3>
+                                <div class="festival__card--subtitle">22 au 24 juillet 2022</div>
+                                <div class="festival__card--quantity">
+                                        <i class="fa-solid fa-minus"></i>
+                                        <input type="number" name="quantity" id="quantity" value="0" min="0">
+                                        <i class="fa-solid fa-plus"></i>
                                 </div>
-                                <button type="submit" class="festival__cards--add-to-cart">Réserver</button>
+                                <div class="festival__card--artists">
+                                    <ul>
+                                        <li>Niska</li>
+                                        <li>Shay</li>
+                                        <li>SCH</li>
+                                        <li>Ninho</li>
+                                    </ul>
+                                </div>
                             </div>
+                            <button id="js-add-to-cart" class="festival__card--add-to-cart">Réserver</button>
                         </div>
-                    </section>
-                </form>
+                    </div>
+                </section>
             </div>
         </div>
     </div>
