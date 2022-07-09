@@ -35,7 +35,7 @@ class Ticket
     private $description;
 
     #[ORM\Column(type: 'text', nullable: true)]
-    private $aartists;
+    private $artists;
 
     #[ORM\ManyToOne(targetEntity: Festival::class, inversedBy: 'ticket')]
     private $festival;
@@ -124,14 +124,14 @@ class Ticket
         return $this;
     }
 
-    public function getAartists(): ?string
+    public function getArtists(): ?string
     {
-        return $this->aartists;
+        return $this->artists;
     }
 
-    public function setAartists(?string $aartists): self
+    public function setArtists(?string $artists): self
     {
-        $this->aartists = $aartists;
+        $this->artists = $artists;
 
         return $this;
     }

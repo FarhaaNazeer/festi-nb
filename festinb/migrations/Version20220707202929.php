@@ -24,7 +24,7 @@ final class Version20220707202929 extends AbstractMigration
         $this->addSql('ALTER TABLE ticket ADD start_date DATE NOT NULL');
         $this->addSql('ALTER TABLE ticket ADD end_date DATE NOT NULL');
         $this->addSql('ALTER TABLE ticket ADD description TEXT DEFAULT NULL');
-        $this->addSql('ALTER TABLE ticket ADD aartists TEXT DEFAULT NULL');
+        $this->addSql('ALTER TABLE ticket ADD artists TEXT DEFAULT NULL');
         $this->addSql('ALTER TABLE ticket ADD festival_id INT DEFAULT NULL');
         $this->addSql('ALTER TABLE ticket ADD CONSTRAINT FK_97A0ADA38AEBAF57 FOREIGN KEY (festival_id) REFERENCES festival (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
         $this->addSql('CREATE INDEX IDX_97A0ADA38AEBAF57 ON ticket (festival_id)');
@@ -38,7 +38,7 @@ final class Version20220707202929 extends AbstractMigration
         $this->addSql('ALTER TABLE ticket DROP start_date');
         $this->addSql('ALTER TABLE ticket DROP end_date');
         $this->addSql('ALTER TABLE ticket DROP description');
-        $this->addSql('ALTER TABLE ticket DROP aartists');
+        $this->addSql('ALTER TABLE ticket DROP artists');
         $this->addSql('ALTER TABLE ticket DROP CONSTRAINT FK_97A0ADA38AEBAF57');
         $this->addSql('DROP INDEX IDX_97A0ADA38AEBAF57');
         $this->addSql('ALTER TABLE ticket DROP festival_id');
