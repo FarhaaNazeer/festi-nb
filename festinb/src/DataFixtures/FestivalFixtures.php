@@ -19,6 +19,8 @@ class FestivalFixtures extends Fixture
                             ->setName($faker->colorName)
                             ->setBeginAt($faker->dateTime)
                             ->setEndAt($faker->dateTime)
+                            ->setCity($faker->city)
+                            ->setCountry($faker->country)
                             ->setDescription($faker->text)
                             ->setShortDescription($faker->text)
             ;

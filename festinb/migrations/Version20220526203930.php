@@ -14,7 +14,7 @@ final class Version20220526203930 extends AbstractMigration
 {
     public function getDescription(): string
     {
-        return '';
+        return 'Create all entities for the project';
     }
 
     public function up(Schema $schema): void
