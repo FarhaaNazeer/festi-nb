@@ -27,8 +27,8 @@ class Reservation
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'reservations')]
     private $userReservation;
 
-    #[ORM\OneToMany(mappedBy: 'reservation', targetEntity: Ticket::class)]
-    private $tickets;
+//    #[ORM\OneToMany(mappedBy: 'reservation', targetEntity: Ticket::class)]
+//    private $tickets;
 
     public function __construct()
     {

@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="container">
+    <h1>Ajout d'un nouveau ticket</h1>
+    {{ form_start(form) }}
+    {{ form_row(form.title) }}
+    {{ form_row(form.start_date) }}
+    {{ form_row(form.end_date) }}
+    {{ form_row(form.price) }}
+    {{ form_row(form.description) }}
+    {{ form_row(form.festival) }}
+    <input type="submit" class="btn btn-primary" value="Enregistrer">
+    {{ form_end(form) }}
+    </div>
+{% endblock %}
