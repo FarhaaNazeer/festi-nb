@@ -8,6 +8,7 @@ use App\Repository\TicketRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
@@ -40,8 +41,10 @@ class TicketController extends AbstractController
     }
 
     #[Route('/api/tickets', name: 'createTickets', methods: ['POST'])]
-    public function createTicket(TicketDto $ticketDto): JsonResponse
+    public function createTicket(Request $request): JsonResponse
     {
+        $ticketDto = $this->serializer->deserialize($request->getContent(), TicketDto::class, 'json');
+
         $ticket = $this->ticketAssembler->reverseTransform($ticketDto);
         $this->entityManager->persist($ticket);
         $this->entityManager->flush();

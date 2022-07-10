@@ -39,7 +39,11 @@ class TicketController extends  AbstractController
 
             if ($form->isSubmitted() && $form->isValid()) {
 
-                $this->manager->post($form->getData());
+                $responseStatusCode = $this->manager->post($form->getData());
+
+                if (!Response::HTTP_OK === $responseStatusCode) {
+                    throw new \Exception('Une erreur est survenue', $responseStatusCode);
+                }
 
                 $this->redirectToRoute('app_ticket_create');
             }

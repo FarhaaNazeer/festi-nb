@@ -2,6 +2,7 @@
 
 namespace App\Controller\Api;
 
+use App\Assembler\Festival\FestivalAssembler;
 use App\Entity\Festival;
 use App\Repository\FestivalRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -11,7 +12,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Component\Serializer\SerializerInterface;
 
@@ -19,6 +19,7 @@ class FestivalController extends AbstractController
 {
     public function __construct(
         private FestivalRepository $repository,
+        private FestivalAssembler $festivalAssembler,
         private SerializerInterface $serializer,
         private  EntityManagerInterface $entityManager
     ) {
@@ -28,10 +29,13 @@ class FestivalController extends AbstractController
     public function getFestivals(): JsonResponse
     {
         $festivals = $this->repository->findAll();
-        $festivalsList = $this->serializer->serialize($festivals, JsonEncoder::FORMAT);
 
         return new JsonResponse([
-            $festivalsList,
+            $this->serializer->serialize(
+                $festivals,
+                'json',
+                ['groups' => 'festival_all']
+            ),
             Response::HTTP_OK,
             ['Content-Type' => 'application/json;charset=UTF-8'],
             true
@@ -41,7 +45,11 @@ class FestivalController extends AbstractController
     #[Route('/api/festivals/{slug}', name: 'detailFestival', methods: ['GET'])]
     public function getFestivalBySlug(Festival $festival): JsonResponse
     {
-        $festival = $this->serializer->serialize($festival, JsonEncoder::FORMAT);
+        $festivalDto = $this->festivalAssembler->transform($festival);
+        $festival = $this->serializer->serialize(
+            $festivalDto,
+            'json',
+        );
 
         return new JsonResponse([
             $festival,

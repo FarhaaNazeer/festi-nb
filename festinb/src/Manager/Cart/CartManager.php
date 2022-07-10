@@ -1,44 +1,41 @@
 <?php
 
-namespace App\Manager\Ticket;
+namespace App\Manager\Cart;
 
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
-class TicketManager
+class CartManager
 {
-    private const ENDPOINT = 'http://localhost/api/tickets';
+    public const ENDPOINT = 'http://localhost/api/carts';
 
     public function __construct(
         private HttpClientInterface $client,
-        private SerializerInterface $serializer
     ) {}
 
     public function get()
     {
-        $response = $this->client->request(
-            'GET',
-            'http://localhost/api/tickets'
-        );
+        // TODO: Implement post() method.
 
-        $jsonResponse = $response->toArray();
-        return json_decode($jsonResponse[0]);
     }
 
-    public function post($ticket)
+
+    public function post(array $data)
     {
         $response = $this->client->request(
             'POST',
             self::ENDPOINT,
             [
-                'body' => $this->serializer->serialize($ticket, 'json', ['options' => 'festival_all']),
+                'json' => $data,
                 'headers' => [
                     'Accept' => 'application/json',
+//                    'Content-Type' => 'application/json',
                 ]
             ]
         );
 
-        return $response->getStatusCode();
+        return $response->toArray();
     }
 
     public function update()

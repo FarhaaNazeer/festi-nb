@@ -2,30 +2,30 @@
 
 namespace App\Repository;
 
-use App\Entity\Pass;
+use App\Entity\Cart;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method Pass|null find($id, $lockMode = null, $lockVersion = null)
- * @method Pass|null findOneBy(array $criteria, array $orderBy = null)
- * @method Pass[]    findAll()
- * @method Pass[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Cart|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Cart|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Cart[]    findAll()
+ * @method Cart[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class PassRepository extends ServiceEntityRepository
+class CartRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Pass::class);
+        parent::__construct($registry, Cart::class);
     }
 
     /**
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function add(Pass $entity, bool $flush = true): void
+    public function add(Cart $entity, bool $flush = true): void
     {
         $this->_em->persist($entity);
         if ($flush) {
@@ -37,7 +37,7 @@ class PassRepository extends ServiceEntityRepository
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function remove(Pass $entity, bool $flush = true): void
+    public function remove(Cart $entity, bool $flush = true): void
     {
         $this->_em->remove($entity);
         if ($flush) {
@@ -46,15 +46,15 @@ class PassRepository extends ServiceEntityRepository
     }
 
     // /**
-    //  * @return Pass[] Returns an array of Pass objects
+    //  * @return Cart[] Returns an array of Cart objects
     //  */
     /*
     public function findByExampleField($value)
     {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.exampleField = :val')
             ->setParameter('val', $value)
-            ->orderBy('p.id', 'ASC')
+            ->orderBy('c.id', 'ASC')
             ->setMaxResults(10)
             ->getQuery()
             ->getResult()
@@ -63,10 +63,10 @@ class PassRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Pass
+    public function findOneBySomeField($value): ?Cart
     {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.exampleField = :val')
             ->setParameter('val', $value)
             ->getQuery()
             ->getOneOrNullResult()

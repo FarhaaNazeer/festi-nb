@@ -40,15 +40,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'json')]
     private $roles = [];
 
-    
     #[ORM\OneToMany(mappedBy: 'userAddress', targetEntity: Address::class)]
     private $address;
-
-    #[ORM\ManyToMany(targetEntity: Festival::class, mappedBy: 'client')]
-    private $festivals;
-
-    #[ORM\OneToMany(mappedBy: 'userReservation', targetEntity: Reservation::class)]
-    private $reservations;
 
     #[ORM\Column(type: 'boolean')]
     private $isVerified = false;
@@ -59,12 +52,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $hostDomain;
 
+    #[ORM\OneToMany(mappedBy: 'userCart', targetEntity: Cart::class)]
+    private $cart;
+
 
     public function __construct()
     {
         $this->address = new ArrayCollection();
-        $this->festivals = new ArrayCollection();
-        $this->reservations = new ArrayCollection();
+        $this->cart = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -191,64 +186,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * @return Collection<int, Festival>
-     */
-    public function getFestivals(): Collection
-    {
-        return $this->festivals;
-    }
-
-    public function addFestival(Festival $festival): self
-    {
-        if (!$this->festivals->contains($festival)) {
-            $this->festivals[] = $festival;
-            $festival->addClient($this);
-        }
-
-        return $this;
-    }
-
-    public function removeFestival(Festival $festival): self
-    {
-        if ($this->festivals->removeElement($festival)) {
-            $festival->removeClient($this);
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Reservation>
-     */
-    public function getReservations(): Collection
-    {
-        return $this->reservations;
-    }
-
-    public function addReservation(Reservation $reservation): self
-    {
-        if (!$this->reservations->contains($reservation)) {
-            $this->reservations[] = $reservation;
-            $reservation->setUserReservation($this);
-        }
-
-        return $this;
-    }
-
-    public function removeReservation(Reservation $reservation): self
-    {
-        if ($this->reservations->removeElement($reservation)) {
-            // set the owning side to null (unless already changed)
-            if ($reservation->getUserReservation() === $this) {
-                $reservation->setUserReservation(null);
-            }
-        }
-
-        return $this;
-    }
-
-
     public function isVerified(): bool
     {
         return $this->isVerified;
@@ -281,6 +218,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setHostDomain(?string $hostDomain): self
     {
         $this->hostDomain = $hostDomain;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Cart>
+     */
+    public function getCart(): Collection
+    {
+        return $this->cart;
+    }
+
+    public function addCart(Cart $cart): self
+    {
+        if (!$this->cart->contains($cart)) {
+            $this->cart[] = $cart;
+            $cart->setUserCart($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCart(Cart $cart): self
+    {
+        if ($this->cart->removeElement($cart)) {
+            // set the owning side to null (unless already changed)
+            if ($cart->getUserCart() === $this) {
+                $cart->setUserCart(null);
+            }
+        }
 
         return $this;
     }

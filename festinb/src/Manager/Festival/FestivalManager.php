@@ -22,6 +22,7 @@ class FestivalManager
             'http://localhost/api/festivals',
         );
 
+
         $jsonResponse = $response->toArray();
         return json_decode($jsonResponse[0]);
     }
@@ -42,7 +43,7 @@ class FestivalManager
         // TODO: Implement delete() method.
     }
 
-    public function findOneBySlug(string $slug) : Festival
+    public function findOneBySlug(string $slug)
     {
         $response = $this->client->request(
             'GET',
@@ -51,8 +52,7 @@ class FestivalManager
         );
 
         $jsonResponse = $response->toArray();
-        $festival = $this->serializer->deserialize($jsonResponse[0], Festival::class, 'json');
 
-        return $festival;
+        return json_decode($jsonResponse[0]);
     }
 }
