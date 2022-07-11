@@ -23,10 +23,14 @@ class FestivalFixtures extends Fixture
                             ->setCountry($faker->country)
                             ->setDescription($faker->text)
                             ->setShortDescription($faker->text)
+
             ;
 
             $manager->persist($festival);
+            $this->setReference('ticket_fixture'.$i, $festival);
+
         }
         $manager->flush();
+
     }
 }

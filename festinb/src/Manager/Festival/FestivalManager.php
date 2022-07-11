@@ -50,8 +50,7 @@ class FestivalManager
             'http://localhost/api/festivals/' . $slug
 
         );
-
-        $jsonResponse = $response->toArray();
+        $jsonResponse = $response->toArray(false);
 
         return json_decode($jsonResponse[0]);
     }

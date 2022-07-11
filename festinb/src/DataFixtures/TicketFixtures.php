@@ -22,10 +22,12 @@ class TicketFixtures extends Fixture
                             ->setPrice($faker->numberBetween(25, 200))
                             ->setIsExpired(false)
                             ->setDescription($faker->text(50))
+                            ->setFestival($this->getReference('ticket_fixture'.$i))
             ;
 
             $manager->persist($ticket);
         }
         $manager->flush();
+
     }
 }
