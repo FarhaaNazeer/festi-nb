@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    {% for ticket in tickets %}
+    <ul>
+        <li>{{ ticket.title }}</li>
+        <li>{{ ticket.startDate }}</li>
+        <li>{{ ticket.endDate }}</li>
+        <li>{{ ticket.price }}</li>
+    </ul>
+    {% endfor %}
+{% endblock %}

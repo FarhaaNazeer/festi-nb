@@ -3,10 +3,12 @@
 namespace App\Traits;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 trait EntityIdTrait
 {
     #[ORM\Column(type: 'uuid', unique: true)]
+    #[Groups(['festival_all'])]
     private $uuid;
 
 

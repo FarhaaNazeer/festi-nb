@@ -15,14 +15,14 @@ class FestivalController extends AbstractController
     #[Route('/festivals', name: 'festivals')]
     public function index(): Response
     {
-        $festivals = $this->manager->findAll();
+        $festivals = $this->manager->get();
 
         return $this->render('front/festival/index.html.twig', [
             'festivals' => $festivals
         ]);
     }
 
-    #[Route('/festival/{slug}', name: 'app_front_festival')]
+    #[Route('/festival/{slug}', name: 'festival')]
     public function festivalBySlug(string $slug): Response
     {
         $festival = $this->manager->findOneBySlug($slug);

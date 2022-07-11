@@ -16,7 +16,7 @@
                 <section class="festival__section">
                     <h2 class="festival__section--title">Informations</h2>
                     <ul class="festival__section--text">
-                        <li>{{ festival.beginAt|date('d/m') }} au {{ festival.endAt|date('d/m/Y') }}</li>
+                        <li>{{ festival.begin_at|date('d/m') }} au {{ festival.end_at|date('d/m/Y') }}</li>
                         <li>{{ festival.city }} | {{ festival.country }}</li>
                         <li></li>
                     </ul>
@@ -28,15 +28,16 @@
                 <section class="festival__section">
                     <h2 class="festival__section--title">FestiPass</h2>
                     <div class="festival__section--text">
-                        <div class="festival__card">
+                        {% for ticket in festival.tickets %}
+                        <div class="festival__card js-ticket" data-uuid="{{ ticket.uuid }}">
                             <img src="https://images.unsplash.com/photo-1513151233558-d860c5398176?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="">
                             <div class="festival__card--description">
-                                <h3 class="festival__card--title">Pass Jour</h3>
-                                <div class="festival__card--subtitle">22 au 24 juillet 2022</div>
+                                <h3 class="festival__card--title">{{ ticket.title|capitalize }}</h3>
+                                <div class="festival__card--subtitle">{{ ticket.startDate|date('d') }} au {{ ticket.endDate|date('d') }}/{{ ticket.startDate|date('m') }}/{{ ticket.startDate|date('Y') }}</div>
                                 <div class="festival__card--quantity">
-                                        <i class="fa-solid fa-minus"></i>
-                                        <input type="number" name="quantity" id="quantity" value="0" min="0">
-                                        <i class="fa-solid fa-plus"></i>
+{#                                        <i class="fa-solid fa-minus js-quantity-minus"></i>#}
+                                        <input type="number" name="quantity" id="quantity" class="js-ticket-quantity" value="1" min="1">
+{#                                        <i class="fa-solid fa-plus js-quantity-plus"></i>#}
                                 </div>
                                 <div class="festival__card--artists">
                                     <ul>
@@ -47,8 +48,15 @@
                                     </ul>
                                 </div>
                             </div>
-                            <button id="js-add-to-cart" class="festival__card--add-to-cart">Réserver</button>
+                            <div class="festival__card--buy">
+                                <span class="festival__card--price">{{ ticket.price|number_format(2, '.', ',')}}€</span>
+                                <button  class="festival__card--add-to-cart js-add-to-cart">Réserver</button>
+                            </div>
                         </div>
+                        {% endfor %}
+                        {% if festival.tickets is empty %}
+                            <p>Aucun billets n'est disponible pour ce festival actuellement.</p>
+                        {% endif %}
                     </div>
                 </section>
             </div>
