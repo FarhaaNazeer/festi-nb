@@ -6,12 +6,10 @@ use App\Assembler\AbstractAssembler;
 use App\Dto\Ticket\TicketDto;
 use App\Entity\Festival;
 use App\Entity\Ticket;
-use App\Repository\FestivalRepository;
 
 class TicketAssembler extends AbstractAssembler
 {
     public function __construct(
-        private FestivalRepository $festivalRepository
     ) {}
 
 
@@ -45,12 +43,6 @@ class TicketAssembler extends AbstractAssembler
         $ticket->setPrice($ticketDto->price);
         $ticket->setDescription($ticketDto->description);
         $ticket->setIsExpired($ticketDto->isExpired ?? false);
-
-        if (null !== $festivalDto = $ticketDto->festival) {
-
-            $festival = current($this->festivalRepository->findBy(['uuid' => $festivalDto->uuid]));
-            $ticket->setFestival($festival);
-        }
 
         return $ticket;
     }

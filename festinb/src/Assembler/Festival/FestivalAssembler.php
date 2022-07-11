@@ -10,10 +10,8 @@ use App\Entity\Festival;
 class FestivalAssembler extends AbstractAssembler
 {
     public function __construct (
-        private TicketAssembler $ticketAssembler
-    )
-    {}
-
+        private TicketAssembler $ticketAssembler,
+    ) {}
 
     public function transform(Festival $festival) : FestivalDto
     {

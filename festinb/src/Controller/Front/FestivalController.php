@@ -22,7 +22,7 @@ class FestivalController extends AbstractController
         ]);
     }
 
-    #[Route('/festival/{slug}', name: 'app_front_festival')]
+    #[Route('/festival/{slug}', name: 'festival')]
     public function festivalBySlug(string $slug): Response
     {
         $festival = $this->manager->findOneBySlug($slug);

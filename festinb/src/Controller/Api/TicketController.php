@@ -2,6 +2,7 @@
 
 namespace App\Controller\Api;
 
+use App\Assembler\Festival\FestivalAssembler;
 use App\Assembler\Ticket\TicketAssembler;
 use App\Dto\Ticket\TicketDto;
 use App\Repository\TicketRepository;
@@ -20,11 +21,12 @@ class TicketController extends AbstractController
         private TicketRepository $repository,
         private SerializerInterface $serializer,
         private EntityManagerInterface $entityManager,
-        private TicketAssembler $ticketAssembler
+        private TicketAssembler $ticketAssembler,
+        private FestivalAssembler $festivalAssembler
     )
     {}
 
-    #[Route('/api/tickets', name: 'tickets', methods: ['GET'])]
+    #[Route('/tickets', name: 'tickets', methods: ['GET'])]
     public function getTickets(): JsonResponse
     {
         $tickets = $this->serializer->serialize(
@@ -40,18 +42,21 @@ class TicketController extends AbstractController
         ]);
     }
 
-    #[Route('/api/tickets', name: 'createTickets', methods: ['POST'])]
+    #[Route('/tickets', name: 'createTickets', methods: ['POST'])]
     public function createTicket(Request $request): JsonResponse
     {
         $ticketDto = $this->serializer->deserialize($request->getContent(), TicketDto::class, 'json');
 
         $ticket = $this->ticketAssembler->reverseTransform($ticketDto);
+
         $this->entityManager->persist($ticket);
         $this->entityManager->flush();
 
-
         return new JsonResponse([
-            $this->serializer->serialize($ticket, 'json'),
+            $this->serializer->serialize(
+                $this->ticketAssembler->transform($ticket),
+                'json'
+            ),
             Response::HTTP_CREATED,
             ['Content-Type' => 'application/json'],
             true

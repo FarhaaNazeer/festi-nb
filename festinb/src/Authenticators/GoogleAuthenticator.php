@@ -30,7 +30,7 @@ class GoogleAuthenticator extends OAuth2Authenticator
 
     public function supports(Request $request): ?bool
     {
-        return $request->attributes->get('_route') === 'app_check_google_connect';
+        return $request->attributes->get('_route') === 'app_front_check_google_connect';
     }
 
     public function getCredentials()

@@ -2,6 +2,7 @@
 
 namespace App\Manager\Ticket;
 
+use App\Assembler\Ticket\TicketAssembler;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
@@ -11,7 +12,8 @@ class TicketManager
 
     public function __construct(
         private HttpClientInterface $client,
-        private SerializerInterface $serializer
+        private SerializerInterface $serializer,
+        private TicketAssembler $ticketAssembler
     ) {}
 
     public function get()

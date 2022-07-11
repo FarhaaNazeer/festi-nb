@@ -26,7 +26,7 @@ class TicketController extends  AbstractController
         ]);
     }
 
-    #[Route('/ticket/create', name: 'app_ticket_create')]
+    #[Route('/ticket/create', name: 'ticket_create')]
     public function create(Request $request): Response
     {
         $festival = new Ticket();
@@ -45,7 +45,7 @@ class TicketController extends  AbstractController
                     throw new \Exception('Une erreur est survenue', $responseStatusCode);
                 }
 
-                $this->redirectToRoute('app_ticket_create');
+                $this->redirectToRoute('app_back_ticket_create');
             }
         }
 

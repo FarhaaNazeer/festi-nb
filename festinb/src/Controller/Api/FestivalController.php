@@ -42,7 +42,7 @@ class FestivalController extends AbstractController
         ]);
     }
 
-    #[Route('/api/festivals/{slug}', name: 'detailFestival', methods: ['GET'])]
+    #[Route('/festivals/{slug}', name: 'detailFestival', methods: ['GET'])]
     public function getFestivalBySlug(Festival $festival): JsonResponse
     {
         $festivalDto = $this->festivalAssembler->transform($festival);
