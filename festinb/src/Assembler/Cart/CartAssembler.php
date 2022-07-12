@@ -12,6 +12,7 @@ class CartAssembler extends AbstractAssembler
 {
 
     public function __construct(
+        private CartItemAssembler $cartItemAssembler
     ) {}
 
     public function transform(Cart $cart): CartDto
@@ -24,6 +25,7 @@ class CartAssembler extends AbstractAssembler
         $cartDto->uuid              = $cart->getUuid();
         $cartDto->reference         = $cart->getReference();
         $cartDto->state             = $cart->getState();
+        $cartDto->items             = $this->cartItemAssembler->transformArray($cart->getCartItems());
         $cartDto->amount            = $cart->getAmount();
         $cartDto->payment_method    = $cart->getPaymentMethod();
         $cartDto->created_at        = $cart->getCreatedAt();

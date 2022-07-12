@@ -38,12 +38,6 @@ class TicketDto
     public ?float $price = null;
 
     /**
-     * @var float|null
-     */
-    #[Groups(['ticket_all'])]
-    public ?float $quantity = null;
-
-    /**
      * @var string|null
      */
     #[Groups(['ticket_all'])]

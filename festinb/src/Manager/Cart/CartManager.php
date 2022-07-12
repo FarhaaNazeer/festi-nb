@@ -14,10 +14,19 @@ class CartManager
         private HttpClientInterface $client,
     ) {}
 
-    public function get()
+    public function getCart(string $uuid)
     {
-        // TODO: Implement post() method.
+        $response = $this->client->request(
+            'GET',
+            'http://localhost/api/cart/'.$uuid,
+            [
+                'headers' => [
+                    'Accept' =>'application/json'
+                ]
+            ]
+        );
 
+        return current($response->toArray(true));
     }
 
 

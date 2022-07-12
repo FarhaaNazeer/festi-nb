@@ -15,7 +15,7 @@ class CartController extends AbstractController
         public CartManager $cartManager
     ) {}
 
-    #[Route('/create-cart', name: 'app_front_create_cart', options: ['expose' => true])]
+    #[Route('/create-cart', name: 'create_cart', options: ['expose' => true])]
     public function createCart(Request $request): Response
     {
         $content = $request->getContent();
@@ -30,8 +30,24 @@ class CartController extends AbstractController
         $cart = json_decode($response[0], true);
 
         return new JsonResponse(
-            $cart['uuid'],
+            $cart,
             Response::HTTP_OK
+        );
+    }
+
+    #[Route('/cart', name: 'get_cart', options: ['expose' => true])]
+    public function getCart(Request $request): JsonResponse
+    {
+        $content = $request->getContent();
+
+        $cartUuid = json_decode($content, true, JSON_THROW_ON_ERROR);
+        $cart = json_decode($this->cartManager->getCart($cartUuid), true);
+
+
+        return new JsonResponse(
+            [
+                'html' => $this->render('front/macro/cart.html.twig', ['cart' => $cart])->getContent()
+            ]
         );
     }
 }

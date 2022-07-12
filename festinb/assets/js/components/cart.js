@@ -6,9 +6,9 @@ const Routing = require('./routing');
 let cart = () => {
 
     let self = {};
+    let parser = new DOMParser();
 
     self.init = () => {
-
         self.targetBtnAddToCart();
         self.targetCloseModalBtn();
     }
@@ -19,7 +19,7 @@ let cart = () => {
             addToCartBtn.addEventListener('click', (event) => {
                 let ticket = addToCartBtn.closest('.js-ticket');
                 let ticketUuid = ticket.dataset.uuid;
-                let quantity = ticket.querySelector('.js-ticket-quantity').value;
+                let quantity = parseInt(ticket.querySelector('.js-ticket-quantity').value);
 
                 if (quantity === 0) {
                     throw new Error('Please add a minimun quantity of 1');
@@ -31,7 +31,9 @@ let cart = () => {
                     self.createCart(ticketUuid, quantity);
                 }
 
-                self.addItemToCart(cartUuid, ticketUuid, quantity);
+                if (cartUuid) {
+                    self.addItemToCart(cartUuid, ticketUuid, quantity);
+                }
             });
         })
     }
@@ -52,16 +54,40 @@ let cart = () => {
             'ticket': {
                 'uuid': ticketUuid,
                 'quantity': parseInt(quantity)
-            }
+            },
         }).then(function (response) {
-                localStorage.setItem('cartUuid', response);
-            }
-        );
+               return response.json();
+        }).then(function (data){
+            localStorage.setItem('cartUuid', data.uuid);
+            self.addItemToCart(data.uuid, ticketUuid, quantity);
+        });
     }
 
 
-    self.addItemToCart = () => {
+    self.addItemToCart = (cartUuid, ticketUuid, quantity) => {
+        self.sendRequest('app_front_add_item', {
+            'cart' : {
+                'uuid' : cartUuid
+            },
+            'tickets' : {
+                'uuid' : ticketUuid
+            },
+            'quantity' : quantity
+        }).then(function (response){
+            console.log(response);
+            return response.json();
+        }).then(function (cartItem){
+          return self.sendRequest('app_front_get_cart', cartItem.cart);
 
+        }).then(function (response){
+            return response.json();
+        }).then(function(data){
+
+            let html = parser.parseFromString(data.html, 'text/html');
+
+            document.querySelector('.cart-modal__item').append(html.documentElement)
+            cartModal().openCartModal();
+        });
     }
 
 
@@ -81,7 +107,7 @@ let cart = () => {
             throw new Error(response.statusText);
         }
 
-        return await response.json();
+        return await response;
     }
 
     return self;
