@@ -13,14 +13,17 @@
         {% endblock %}
 
         {% block javascripts %}
+            <script src="{{asset('assets/cookies/tarteaucitron.js')}}"></script>
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
+        
     </head>
     <body>
         <div class="main">
             {% block body %}
                 {% include '_navbar.html.twig'  %}
                 {% block content %} {% endblock %}
+                {% include '_footer.html.twig'  %}
             {% endblock %}
         </div>
         {% include 'components/_cart_modal.html.twig' %}
