@@ -4,6 +4,7 @@ namespace App\Controller\Api;
 
 use App\Assembler\Cart\CartAssembler;
 use App\Dto\Cart\CartDto;
+use App\Entity\Cart;
 use App\Repository\CartRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -24,11 +25,17 @@ class CartController extends AbstractController
     )
     {}
 
-    #[Route('/api/carts', name: 'carts', methods: ['GET'])]
+    #[Route('/carts', name: 'carts', methods: ['GET'])]
     public function getCarts(): JsonResponse
     {
+        $carts =  $this->repository->findAll();
+        $arrayCarts = [];
+        foreach ($carts as $cart) {
+            $arrayCarts[] = $this->cartAssembler->transform($cart);
+        }
+
         $carts = $this->serializer->serialize(
-            $this->repository->findAll(),
+            $arrayCarts,
             JsonEncoder::FORMAT
         );
 
@@ -40,8 +47,22 @@ class CartController extends AbstractController
         ]);
     }
 
-    #[Route('/api/carts', name: 'createCart', methods: ['POST'])]
-    public function createTicket(CartDto $cartDto): JsonResponse
+    #[Route('/cart/{uuid}', name: 'cart', methods: ['GET'])]
+    public function getCart(Cart $cart): JsonResponse
+    {
+        $cartDto = $this->cartAssembler->transform($cart);
+
+        return new JsonResponse([
+            $this->serializer->serialize(
+                $cartDto,
+                'json',
+                ['Content-Type' => 'application/json;charset=UTF-8'],
+            )
+        ]);
+    }
+
+    #[Route('/carts', name: 'createCart', methods: ['POST'])]
+    public function createCart(CartDto $cartDto): JsonResponse
     {
         try {
             $cart = $this->cartAssembler->reverseTransform($cartDto);

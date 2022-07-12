@@ -1,0 +1,12 @@
+{% for item in cartItem %}
+      <div class="cart-modal__item--image">
+          <img src="" alt="">
+      </div>
+      <div class="cart-modal__item--description">
+          <div class="cart-modal__item--title">{{ item.tickets.title }}</div>
+          <div class="cart-modal__item--quantity">
+              <span>Quantité : {{ item.tickets.quantity }}</span>
+          </div>
+          <div class="cart-modal__item--subtotal">{{ item.tickets.price|number_format(2, '.', ',') }}</div>
+      </div>
+ {% endfor %}
