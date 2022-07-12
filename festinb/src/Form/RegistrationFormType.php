@@ -20,6 +20,7 @@ class RegistrationFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+            ->setAction('/send_register')
             ->add('firstname', TextType::class, [
                 'label' => false,
                 'attr' => [
@@ -38,36 +39,44 @@ class RegistrationFormType extends AbstractType
                 'label' => false,
                 'attr' => [
                     'placeholder' => 'Email',
-                    'class' => 'form__input'
+                    'class' => 'form__input',
+                    'autocomplete' => 'email'
                 ]
             ])
             ->add('password', RepeatedType::class, [
                 'type' => PasswordType::class,
-                'invalid_message' => 'Les mots de passe ne correspondent pas',
-                'options' => ['attr' => ['class' => 'form__input', 'placeholder' => 'Mot de passe']],
-                'first_options'  => ['label' => false],
-                'second_options' => ['label' => false],
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'Please enter a password',
-                    ]),
-                    new Length([
-                        'min' => 6,
-                        'minMessage' => 'Your password should be at least {{ limit }} characters',
-                        // max length allowed by Symfony for security reasons
-                        'max' => 4096,
-                    ]),
+                'first_options' => [
+                    'attr' => [
+                        'autocomplete' => 'new-password',
+                        'placeholder' => 'Mot de passe',
+                        'class' => 'form__input'
+                    ],
+                    'constraints' => [
+                        new NotBlank([
+                            'message' => 'Veuillez entrer un mot de passe',
+                        ]),
+                        new Length([
+                            'min' => 6,
+                            'minMessage' => 'Votre mot de passe à moins de {{ limit }} caractères',
+                            // max length allowed by Symfony for security reasons
+                            'max' => 4096,
+                        ]),
+                    ],
+                    'label' => false,
                 ],
-            ])
-//            ->add('agreeTerms', CheckboxType::class, [
-//                'mapped' => false,
-//                'constraints' => [
-//                    new IsTrue([
-//                        'message' => 'You should agree to our terms.',
-//                    ]),
-//                ],
-//            ])
-        ;
+                'second_options' => [
+                    'attr' => [
+                        'autocomplete' => 'new-password',
+                        'placeholder' => 'Confirmer le mot de passe',
+                        'class' => 'form__input'
+                    ],
+                    'label' => false,
+                ],
+                'invalid_message' => 'Les mots de passe ne correspondent pas',
+                // Instead of being set onto the object directly,
+                // this is read and encoded in the controller
+                'mapped' => false,
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
