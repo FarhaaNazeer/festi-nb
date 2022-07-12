@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Festinb | Mot de passe oublié{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('forgot_password_scss') }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
+    <div class="forgot-password__wrapper">
+        <div class="forgot-password__title">
+            <div class="forgot-password__title--forgot-password">Réinitialiser votre mot de passe</div>
+        </div>
+        <div class="forgot-password__container">
+            <div>
+                <div>
+                    {% include "reset_password/_reset.html.twig" %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

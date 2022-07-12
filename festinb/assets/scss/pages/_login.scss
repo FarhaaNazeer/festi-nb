@@ -85,6 +85,10 @@ html, body {
       color: $sunyellow;
     }
 
+    &__forgot-password {
+      text-align: end;
+    }
+
     &__forgot-password a:hover,
     &__signup-btn a:hover
     {

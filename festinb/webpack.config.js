@@ -35,6 +35,7 @@ Encore
     .addStyleEntry('festivals_scss', './assets/scss/pages/_festivals.scss')
     .addStyleEntry('festival_card_scss', './assets/scss/components/_festival_card.scss')
     .addStyleEntry('festival_scss', './assets/scss/pages/_festival.scss')
+    .addStyleEntry('forgot_password_scss', './assets/scss/pages/_forgot_password.scss')
 
 
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
