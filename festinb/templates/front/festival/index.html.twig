@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}FestiNB | Festivals {% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('festivals_scss') }}
+    {{ encore_entry_link_tags('filters_scss') }}
+    {{ encore_entry_link_tags('festival_card_scss') }}
+{% endblock %}
+
+
+{% block content %}
+    <div class="content">
+        <div class="festivals">
+{#            <h1 class="festivals__title">Tous les festivals</h1>#}
+            {% set image =  "https://images.unsplash.com/photo-1510673398445-94f476ef2cbc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1172&q=80" %}
+            {% include 'components/festival/banner_title.html.twig' with {'title' : 'Tous les festivals', 'image' : image } %}
+            <div class="useful-width">
+                <div class="festivals__container">
+                    <div class="festivals__header">
+                        <h1 class="festivals__header--title">Prochainement ...</h1>
+                        <div class="festivals__header--filters">
+                            <div class="filters js-filters">
+                                <ul class="filters__tabs">
+                                    <li class="js-filters-container-toggle">Artistes</li>
+                                    <li class="js-filters-container-toggle">Villes</li>
+                                    <li class="js-filters-container-toggle">Prix</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="festivals__items">
+                        {% for festival in festivals %}
+                        <div class="festivals__item">
+                            <div class="festival__block">
+                                <div class="festival__header">
+                                    <a href="">
+                                        <img src="https://images.unsplash.com/photo-1578850141295-7fb35c301da6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="">
+                                    </a>
+                                </div>
+                                <div class="festival__body">
+                                    <div class="festival__body--title">{{ festival.name }}</div>
+                                    <div class="festival__body--subtitle">{{ festival.city }} , {{ festival.country }} | {{ festival.begin_at|date('d') }}-{{ festival.end_at|date('d') }}/{{ festival.end_at|date('m') }}/{{ festival.end_at|date('Y') }}</div>
+{#                                    <div class="festival__body--description">{{ festival.description }}</div>#}
+                                </div>
+                                <div class="festival__footer">
+                                    <div class="festival__footer--price">A partir de : 99.00€</div>
+                                    <div class="festival__footer--booking"><a href="{{ path('app_front_festival', { 'slug' : festival.slug }) }}">Réserver</a></div>
+                                    <i class="fa-solid fa-arrow-right"></i>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

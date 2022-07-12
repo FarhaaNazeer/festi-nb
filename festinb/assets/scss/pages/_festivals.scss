@@ -1,0 +1,45 @@
+@import '../abstracts/_variables.scss';
+
+.festivals
+{
+  background: #FEFCFB;
+
+  &__title {
+    background-attachment: fixed;
+    background-image: url(https://images.unsplash.com/photo-1510673398445-94f476ef2cbc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1172&q=80);
+    margin: 0;
+    height: 5em;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: white;
+    line-height: 5em;
+    text-align: center;
+    width: 100%;
+  }
+
+  &__header{
+    &--title {
+      @media all and (max-width: 768px) {
+        font-size: 1.8em;
+      }
+    }
+  }
+
+  &__items {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    grid-column-gap: 1rem;
+    grid-row-gap: 1rem;
+    margin-top: 3em;
+
+    @media all and (max-width: 425px) {
+      grid-template-columns: repeat(1,1fr);
+    }
+  }
+
+  &__item {
+    background: $white;
+    position: relative;
+  }
+}

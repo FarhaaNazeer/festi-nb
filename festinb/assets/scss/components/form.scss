@@ -1,0 +1,27 @@
+.form{
+
+  &__row {
+    height: 3em;
+    width: 100%;
+    margin-top: 1.4em;
+
+    input:focus {
+      border-color: $sunyellow;
+
+    }
+  }
+
+  &__input {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1em;
+    height: 70%;
+    width: 95%;
+    border: 1px solid lightgrey;
+    border-bottom-width: 2px;
+    padding-left: 0.7em;
+
+    @media all and (max-width: 425px) {
+      width: 90%;
+    }
+  }
+}

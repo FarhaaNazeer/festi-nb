@@ -1,0 +1,26 @@
+@import
+          "abstracts/variables",
+          "base/fonts",
+          "base/typography",
+          "base/base",
+
+          // Fontawesome
+          //"fontawesome/fontawesome",
+          //"fontawesome/variables",
+
+          // Layouts
+          "layouts/navbar",
+          "layouts/footer",
+          "layouts/client_area",
+
+          // Swiper
+          "node_modules/swiper/swiper.scss",
+
+          // Components
+          "components/buttons",
+          "components/form",
+          "components/inputs",
+          "layouts/cart_modal"
+;
+
+//@import "~bootstrap/scss/bootstrap";

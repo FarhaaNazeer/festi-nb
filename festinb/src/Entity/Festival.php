@@ -10,6 +10,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: FestivalRepository::class)]
@@ -21,34 +22,45 @@ class Festival
     use TimestampTrait;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Groups(['festival_all'])]
     private $name;
 
     #[ORM\Column(type: 'string', length: 255)]
     #[Gedmo\Slug(fields: ['name'])]
+    #[Groups(['festival_all'])]
     private $slug;
 
     #[ORM\Column(type: 'datetime')]
+    #[Groups(['festival_all'])]
     private $begin_at;
 
     #[ORM\Column(type: 'datetime')]
+    #[Groups(['festival_all'])]
     private $end_at;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['festival_all'])]
     private $short_description;
 
     #[ORM\Column(type: 'text', nullable: true)]
+    #[Groups(['festival_all'])]
     private $description;
 
-    #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'festivals')]
-    private $client;
+    #[ORM\Column(type: 'string', length: 255)]
+    #[Groups(['festival_all'])]
+    private $city;
 
-    #[ORM\OneToMany(mappedBy: 'festival', targetEntity: Pass::class)]
-    private $passes;
+    #[ORM\Column(type: 'string', length: 255)]
+    #[Groups(['festival_all'])]
+    private $country;
+
+    #[ORM\OneToMany(mappedBy: 'festival', targetEntity: Ticket::class)]
+    #[Groups(['festival_all'])]
+    private $ticket;
 
     public function __construct()
     {
-        $this->client = new ArrayCollection();
-        $this->passes = new ArrayCollection();
+        $this->ticket = new ArrayCollection();
     }
 
     public function getName(): ?string
@@ -123,54 +135,54 @@ class Festival
         return $this;
     }
 
-    /**
-     * @return Collection<int, User>
-     */
-    public function getClient(): Collection
+    public function getCity(): ?string
     {
-        return $this->client;
+        return $this->city;
     }
 
-    public function addClient(User $client): self
+    public function setCity(string $city): self
     {
-        if (!$this->client->contains($client)) {
-            $this->client[] = $client;
+        $this->city = $city;
+
+        return $this;
+    }
+
+    public function getCountry(): ?string
+    {
+        return $this->country;
+    }
+
+    public function setCountry(string $country): self
+    {
+        $this->country = $country;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Ticket>
+     */
+    public function getTicket(): Collection
+    {
+        return $this->ticket;
+    }
+
+    public function addTicket(Ticket $ticket): self
+    {
+        if (!$this->ticket->contains($ticket)) {
+            $this->ticket[] = $ticket;
+            $ticket->setFestival($this);
         }
 
         return $this;
     }
 
-    public function removeClient(User $client): self
+    public function removeTicket(Ticket $ticket): self
     {
-        $this->client->removeElement($client);
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Pass>
-     */
-    public function getPasses(): Collection
-    {
-        return $this->passes;
-    }
-
-    public function addPass(Pass $pass): self
-    {
-        if (!$this->passes->contains($pass)) {
-            $this->passes[] = $pass;
-            $pass->setFestival($this);
-        }
-
-        return $this;
-    }
-
-    public function removePass(Pass $pass): self
-    {
-        if ($this->passes->removeElement($pass)) {
+        if ($this->ticket->removeElement($ticket)) {
             // set the owning side to null (unless already changed)
-            if ($pass->getFestival() === $this) {
-                $pass->setFestival(null);
+            if ($ticket->getFestival() === $this) {
+                $ticket->setFestival(null);
             }
         }
 

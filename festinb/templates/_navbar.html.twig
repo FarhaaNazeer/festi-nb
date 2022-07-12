@@ -1,0 +1,29 @@
+<div class="navbar">
+    <nav class="navbar__content">
+        <div class="navbar__logo">
+            <img src="{{ asset('/assets/images/LOGO.png') }}" alt="FestiNB Logo">
+        </div>
+        <ul id="navLinks" class="navbar__links">
+            <li class="navbar__links--item"> <a href="{{ path('app_front_home') }}">Accueil</a></li>
+            <li class="navbar__links--item"> <a href="{{ path('app_front_festivals') }}">Festivals</a></li>
+            <li class="navbar__links--item"> <a href="">Partenaires</a></li>
+            <li class="navbar__links--item navbar__links--icon-user">
+                <i class="fa-solid fa-user"></i>
+                <a href="{{ path('app_front_login') }}">Se connecter</a>
+            </li>
+        </ul>
+{#        <div class="navbar-icons">#}
+{#            <div class="navbar-account">#}
+{#                <i class="fa-solid fa-user"></i>#}
+{#            </div>#}
+{#            <div class="navbar-cart"></div>#}
+{#        </div>#}
+        <div id="toggleButton"  class="menu">
+            <div class="menu__list">
+                <div class="menu__line"></div>
+                <div class="menu__line"></div>
+                <div class="menu__line"></div>
+            </div>
+        </div>
+    </nav>
+</div>

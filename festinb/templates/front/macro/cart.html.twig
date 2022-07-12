@@ -1,0 +1,23 @@
+{% set cartItem = cart.items %}
+{% for item in cartItem %}
+    <div class="cart-modal__item">
+        <div class="cart-modal__item--content">
+          <img class="cart-modal__item--image" src="https://images.unsplash.com/photo-1513151233558-d860c5398176?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="">
+          <div class="cart-modal__item--description">
+              <div class="cart-modal__item--header">
+                <div class="cart-modal__item--title">{{ item.tickets.title }}</div>
+              </div>
+              <div class="cart-modal__item--body">
+                  <div class="cart-modal__item--price">Price : {{ item.tickets.price|number_format(2, '.', ' ') }}€</div>
+                  <div class="cart-modal__item--quantity">
+                      <span>Quantité : {{ item.quantity }}</span>
+                  </div>
+              </div>
+              <div class="cart-modal__item--footer">
+                  {% set subtotal =  item.tickets.price * item.quantity %}
+                  <div class="cart-modal__item--subtotal">Sous-total :{{ subtotal|number_format(2, '.', ' ') }}€</div>
+              </div>
+          </div>
+        </div>
+    </div>
+ {% endfor %}

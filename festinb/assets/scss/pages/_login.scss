@@ -1,0 +1,109 @@
+@import '../abstracts/_variables.scss';
+
+html, body {
+  background: $lightgrey;
+}
+.login
+{
+  &--wrapper {
+    max-width: 25%;
+    margin: 3em auto;
+    background: $white;
+    box-shadow: 0 15px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 0.5em;
+    padding: 2em 3em;
+    overflow: hidden;
+
+    @media all and (max-width: 768px) {
+      max-width: 70%;
+    }
+  }
+
+  &--title {
+    display: flex;
+    width: 200%;
+
+    &__signin,
+    &__signup {
+      width: 50%;
+      font-size: 1.8em;
+      font-weight: 600;
+      text-align: center;
+    }
+  }
+
+  &--container {
+    width: 100%;
+    overflow: hidden;
+  }
+
+  &--slide-controls {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    height: 3em;
+    width: 95%;
+    margin: 30px 0 10px 0;
+    border: 1px solid $lightgrey;
+    border-radius: 0.2em;
+
+    &__slide {
+      height: 100%;
+      width: 100%;
+      font-weight: 600;
+      text-align: center;
+      line-height: 48px;
+      cursor: pointer;
+    }
+
+    &__active {
+      background: $orange-gradient;
+      border-radius: 7px;
+      color: white;
+      transition: background 0.5s ease-in;
+    }
+  }
+
+  &--inner {
+    //display: flex;
+    //width: 200%;
+
+    form {
+      //width: 50%;
+    }
+  }
+
+  .active {
+    display: block;
+    transition: all 0.5s ease-out;
+  }
+
+  &--form {
+
+    &__forgot-password a,
+    &__signup-btn a {
+      color: $sunyellow;
+    }
+
+    &__forgot-password {
+      text-align: end;
+    }
+
+    &__forgot-password a:hover,
+    &__signup-btn a:hover
+    {
+      text-decoration: underline;
+    }
+
+    &__signup-btn {
+      text-align: center;
+      margin-top: 0.7em;
+    }
+
+    &__icons {
+      display: flex;
+      justify-content: center;
+      margin-top: 1.5em;
+    }
+  }
+}
