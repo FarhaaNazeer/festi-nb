@@ -9,6 +9,7 @@
 import '../scss/app.scss';
 import './components/layouts/navbar';
 import './components/cart';
+import './components/cookie';
 
 // import { Tooltip, Toast, Popover } from 'bootstrap';
 

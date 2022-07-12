@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('client_area_scss') }}
+{% endblock %}
+
+
+{% block content %}
+<div class="useful-width">
+    <div class="container_client_area">
+
+        <div class="container_client_area__container_toolbox">
+
+            <img class="container_client_area__container_toolbox--picture_user"src="{{asset('assets/images/picture_user.png')}}" alt="picture_user">
+            <h6 class="container_client_area__container_toolbox--name">Festi'Nb</h6>
+            <h2>Espace personnelles</h2>
+
+            <div class="container_client_area__container_toolbox--bar_link">
+                <li><a href="#">Informations personnelles</a></li>
+                <li><a href="#">Changer le mot de passe</a></li>
+                <li><a href="#">Mes commandes</a></li>
+                <li><a href="#">Historique de commande</a></li>
+            </div>
+        </div>
+
+        <div class="container_client_area__form_row">
+
+                    <div class="form__row">
+                        <input type="text" placeholder="Prénom*" class="form__input">
+                    </div>
+
+                    <div class="form__row">
+                        <input type="text" placeholder="Nom*" class="form__input">
+                    </div>
+                
+                    <div class="form__row">
+                        <input type="text" placeholder="Adresse mail*" class="form__input">
+                    </div>
+                    
+                    <div class="form__row">
+                        <input type="text" placeholder="adresse postale*" class="form__input">
+                    </div>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
