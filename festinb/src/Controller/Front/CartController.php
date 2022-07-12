@@ -43,9 +43,10 @@ class CartController extends AbstractController
         $cartUuid = json_decode($content, true, JSON_THROW_ON_ERROR);
         $cart = json_decode($this->cartManager->getCart($cartUuid), true);
 
+
         return new JsonResponse(
             [
-                'html' => $this->render('front/macro/cart.html.twig', ['cartItem' => $cart['items']])->getContent()
+                'html' => $this->render('front/macro/cart.html.twig', ['cart' => $cart])->getContent()
             ]
         );
     }
