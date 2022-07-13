@@ -26,9 +26,22 @@ class FestivalController extends AbstractController
     }
 
     #[Route('/festivals', name: 'festivals', methods: ['GET'])]
-    public function getFestivals(): JsonResponse
+    public function getFestivals(Request $request): JsonResponse
     {
-        $festivals = $this->repository->findAll();
+        $filters = $request->query->all();
+        if (count($filters) > 0) {
+            if (array_key_exists('begin_at', $filters)) {
+                $filters['begin_at'] = new \DateTime($filters['begin_at']);
+            }
+
+            if (array_key_exists('end_at', $filters)) {
+                $filters['end_at'] = new \DateTime($filters['end_at']);
+            }
+
+            $festivals = $this->repository->findBy($filters);
+        } else {
+            $festivals = $this->repository->findAll();
+        }
 
         return new JsonResponse([
             $this->serializer->serialize(

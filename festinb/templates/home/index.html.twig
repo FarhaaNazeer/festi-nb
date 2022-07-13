@@ -13,22 +13,23 @@
     {{ encore_entry_script_tags('homepage_slider_js') }}
 {% endblock %}
 {% block content %}
-    {% macro searchBar() %}
+    {% macro searchBar(formSearch) %}
         <div class="search-bar">
             <h2>Recherche ton festival</h2>
-            <div class="search-bar__inputs">
-                <input type="text" class="input input__small search-bar__input" placeholder="Ville">
-                <input type="text" class="input input__small search-bar__input" placeholder="Date de début">
-                <input type="text" class="input input__small search-bar__input" placeholder="Date de fin">
-                <input type="submit" value="Go!" class="btn btn__small">
-            </div>
+
+            <form method="post" name="search_bar_form" action="{{path('app_front_festivals')}}" class="search-bar__inputs">
+                <input id="search_bar_form_city" name="search_bar_form[city]" type="text" class="input input__small search-bar__input" placeholder="Ville">
+                <input id="search_bar_form_begin_at" name="search_bar_form[begin_at]" type="date" class="input input__small search-bar__input" placeholder="Date de début">
+                <input id="search_bar_form_end_at" name="search_bar_form[end_at]" type="date" class="input input__small search-bar__input" placeholder="Date de fin">
+                <button type="submit" class="btn btn__small btn--orange-gradient btn--white">Go!</button>
+            </form>
         </div>
     {% endmacro %}
     <div class="swiper js-homepage-slider">
         <div class="swiper-wrapper">
-            <div class="swiper-slide swiper-slide__first">{{ _self.searchBar() }}</div>
-            <div class="swiper-slide swiper-slide__second">{{ _self.searchBar() }}</div>
-            <div class="swiper-slide swiper-slide__third">{{ _self.searchBar() }}</div>
+            <div class="swiper-slide swiper-slide__first">{{ _self.searchBar(formSearch) }}</div>
+            <div class="swiper-slide swiper-slide__second">{{ _self.searchBar(formSearch) }}</div>
+            <div class="swiper-slide swiper-slide__third">{{ _self.searchBar(formSearch) }}</div>
         </div>
         <div class="swiper-button-prev"></div>
         <div class="swiper-button-next"></div>
