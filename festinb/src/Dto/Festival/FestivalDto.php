@@ -35,6 +35,12 @@ class FestivalDto
      * @var string|null
      */
     #[Groups(['festival_all'])]
+    public ?string $slug = null;
+
+    /**
+     * @var string|null
+     */
+    #[Groups(['festival_all'])]
     public ?string $short_description = null;
 
     /**
@@ -43,9 +49,6 @@ class FestivalDto
     #[Groups(['festival_all'])]
     public ?string $description = null;
 
-
-//    public $client = null;
-//    public $passes = null;
 
     /**
      * @var string|null
@@ -69,6 +72,18 @@ class FestivalDto
      */
     #[Groups(['festival_all'])]
     public $tickets = null;
+
+    /**
+     * @var \DateTimeInterface|null
+     */
+    #[Groups(['festival_all'])]
+    public ?\DateTimeInterface $created_at = null;
+
+    /**
+     * @var \DateTimeInterface|null
+     */
+    #[Groups(['festival_all'])]
+    public ?\DateTimeInterface $updated_at = null;
 
 
 }

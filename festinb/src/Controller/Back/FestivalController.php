@@ -4,6 +4,7 @@ namespace App\Controller\Back;
 
 use App\Entity\Festival;
 use App\Form\FestivalType;
+use App\Manager\Festival\FestivalManager;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -12,16 +13,24 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class FestivalController extends AbstractController
 {
-    #[Route('/festival', name: 'festival')]
+
+    public function __construct(
+        private FestivalManager $festivalManager
+    ) {}
+
+    #[Route('/festivals', name: 'festivals')]
     public function index(): Response
     {
-        return $this->render('festival/index.html.twig', [
-            'controller_name' => 'FestivalController',
+
+        $festivals = $this->festivalManager->getFestivals();
+//        dd($festivals);
+        return $this->render('back/festival/index.html.twig', [
+            'festivals' => $festivals,
         ]);
     }
 
     #[Route('/festival/create', name: 'festival_create')]
-    public function add(Request $request, ManagerRegistry $doctrine): Response
+    public function create(Request $request, ManagerRegistry $doctrine): Response
     {
         $festival = new Festival();
         $manager = $doctrine->getManager();

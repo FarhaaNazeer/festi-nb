@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}Festinb | Administration{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('login_admin_scss') }}
+    {{ encore_entry_link_tags('register_admin_scss') }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('login_js') }}
+{% endblock %}
+
+{% block content %}
+<div class="login--wrapper">
+    <div class="login--title">
+        <div class="login--title__signin">Connexion</div>
+    </div>
+    <div class="login--container">
+        <div class="login--slide-controls">
+            <label id="signInSlide" for="signin" class="login--slide-controls__signin login--slide-controls__slide login--slide-controls__active" data-form="login">Connexion</label>
+        </div>
+        <div class="login--inner">
+            <div class="login--signin">
+                {% include 'front/security/_login_macro.html.twig' %}
+            </div>
+        </div>
+        <div class="login--slide-tab"></div>
+    </div>
+</div>
+{% endblock %}

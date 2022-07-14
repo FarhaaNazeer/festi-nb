@@ -1,0 +1,21 @@
+@import '../../../common/abstracts/variables';
+
+.card {
+
+  background: $white;
+  border-radius: 5px;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #f0f0f0;
+
+  }
+
+  &__header,
+  &__body
+  {
+    padding: 1rem;
+  }
+}

@@ -18,8 +18,11 @@ class FestivalType extends AbstractType
         $builder
             ->add('name', TextType::class, [
                 'label' => 'Nom du festival',
+                'label_attr' => [
+                    'class' => 'form__label'
+                ],
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'form-control form__label'
                 ]
             ])
             ->add('begin_at', DateType::class, [
@@ -36,12 +39,18 @@ class FestivalType extends AbstractType
             ])
             ->add('short_description', TextareaType::class, [
                 'label' => 'Description courte',
+                'label_attr' => [
+                    'class' => 'form__label'
+                ],
                 'attr' => [
                     'class' => 'form-control'
                 ]
             ])
             ->add('description', TextareaType::class, [
                 'label' => 'Longue description',
+                'label_attr' => [
+                    'class' => 'form__label'
+                ],
                 'attr' => [
                     'class' => 'form-control'
                 ]
@@ -54,7 +63,10 @@ class FestivalType extends AbstractType
                 'asset_helper' => true,
                 'attr' => [
                     'class' => 'form-control'
-                ]
+                ],
+                'label_attr' => [
+                    'class' => 'form__label'
+                ],
             ])
         ;
     }

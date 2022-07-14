@@ -1,0 +1,23 @@
+.recent-grid {
+  margin-top: 3.5rem;
+  display: grid;
+  grid-gap: 2rem;
+  grid-template-columns: 67% auto;
+}
+
+.table {
+  border-collapse: collapse;
+}
+
+thead tr {
+  border-top: 1px solid #f0f0f0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+thead td {
+  font-weight: 700;
+}
+
+ td {
+  padding: .5rem;
+}

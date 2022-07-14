@@ -1,0 +1,30 @@
+@import '../../../common/abstracts/_variables.scss';
+
+.btn
+{
+  padding: 0.8em;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  border: none;
+  border-radius: 0.4em;
+  font-weight: 600;
+
+  &--blue-white {
+    background-color: $sunblue;
+    color: $white;
+  }
+
+  &--medium {
+    width: 20em;
+  }
+
+  &--dashboard
+  {
+    background: $maincolor;
+    border-radius: 10px;
+    color: $white;
+    font-size: .8rem;
+    padding: .5rem 1rem;
+    border: 1px solid $maincolor;
+  }
+}

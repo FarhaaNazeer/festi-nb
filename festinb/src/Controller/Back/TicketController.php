@@ -21,7 +21,7 @@ class TicketController extends  AbstractController
     {
         $tickets = $this->manager->get();
 
-        return $this->render('back/ticket/index.html.twig', [
+        return $this->render('back/ticket/login.html.twig', [
             'tickets' => $tickets
         ]);
     }

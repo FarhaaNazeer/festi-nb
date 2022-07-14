@@ -54,6 +54,6 @@ class CartController extends AbstractController
     #[Route('/cart-front', name: 'cart_front')]
     public function cartFront(Request $request): Response
     {
-        return $this->render('front/cart/index.html.twig');
+        return $this->render('front/cart/login.html.twig');
     }
 }

@@ -1,0 +1,27 @@
+.form
+{
+  text-align: center;
+
+  &__title {
+    text-align: center;
+  }
+
+  &__label {
+    margin-left: 2em;
+  }
+
+  &__row
+  {
+    display: flex;
+    flex-direction: column;
+    margin: 1.5em 0;
+    align-items: center;
+  }
+
+  &__block
+  {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+}

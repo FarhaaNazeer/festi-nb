@@ -1,16 +1,22 @@
-{% extends 'base.html.twig' %}
+{% extends 'back/base.html.twig' %}
 
-{% block body %}
-    <div class="container">
-        <h1>Ajout d'un nouveau festival</h1>
-        {{ form_start(form) }}
-        {{ form_row(form.name) }}
-        {{ form_row(form.begin_at) }}
-        {{ form_row(form.end_at) }}
-        {{ form_row(form.short_description) }}
-        {{ form_row(form.description) }}
-        {{ form_row(form.imageFile) }}
-        <input type="submit" class="btn btn-primary" value="Enregistrer">
-        {{ form_end(form) }}
-    </div>
+{% block content %}
+    <main>
+        <div class="useful-width useful-width__white-background">
+            <div class="form">
+                <h1 class="form__title">Ajout d'un nouveau festival</h1>
+                {{ form_start(form) }}
+                {{ form_row(form.name) }}
+                <div class="form__block">
+                    {{ form_row(form.begin_at) }}
+                    {{ form_row(form.end_at) }}
+                </div>
+                {{ form_row(form.short_description) }}
+                {{ form_row(form.description) }}
+                {{ form_row(form.imageFile) }}
+                <input type="submit" class="btn btn--dashboard btn--medium" value="Enregistrer">
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </main>
 {% endblock %}

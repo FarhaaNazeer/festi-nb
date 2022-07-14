@@ -24,8 +24,25 @@ ul {
   @media all and (max-width: 768px) {
     padding: 0 2rem;
   }
+
+  &__white-background
+  {
+    background: white;
+    padding: 1em;
+    border-radius: 12px;
+  }
 }
 
-.text-center{
-  text-align: center;
+
+
+.container
+{
+  margin-left: 345px;
+}
+
+main {
+  margin-top: 130px;
+  padding: 1.5rem;
+  background: #f1f5f9;
+  min-height: calc(100vh - 90px);
 }

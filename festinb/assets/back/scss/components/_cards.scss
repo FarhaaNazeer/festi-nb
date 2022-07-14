@@ -1,0 +1,41 @@
+@import '../../../common/abstracts/variables';
+
+.cards
+{
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 2rem;
+  margin-top: 1rem;
+
+  &__single
+  {
+    display: flex;
+    justify-content: space-between;
+    background: $white;
+    padding: 2rem;
+    border-radius: 2px;
+
+    div:last-child span {
+      font-size: 2rem;
+      color: $maincolor;
+    }
+
+    div:first-child span {
+      color: $greydash;
+    }
+
+    :last-child div:last-child span {
+      color: $white;
+    }
+
+
+    h1 {
+
+
+    }
+
+    span {
+
+    }
+  }
+}
