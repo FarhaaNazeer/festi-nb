@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <table id="table_id" class="display" cellspacing="0" width="100%">
+        <thead>
+        <tr>
+            <th>Référence</th>
+            <th>Etat</th>
+            <th>Moyen de paiement</th>
+            <th>Quantité</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for reservation in reservations %}
+        <tr>
+            <td>{{ reservation.reference }}</td>
+            <td>{{ reservation.state }}</td>
+            <td>{{ reservation.payment_method }}</td>
+            <td>{{ reservation.quantity }}</td>
+            <td align="center">
+                <a class="btn btn-default" href="{{ url('ticket_update', {'id': reservation.id()}) }}"><em class="fa fa-pencil"></em></a>
+                <a class="btn btn-danger" href="{{ url('ticket_delete', {'id': reservation.id()}) }}"><em class="fa fa-trash"></em></a>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
