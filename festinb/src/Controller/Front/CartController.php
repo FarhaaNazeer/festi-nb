@@ -42,7 +42,7 @@ class CartController extends AbstractController
         );
     }
 
-    #[Route('/cart', name: 'get_cart', options: ['expose' => true])]
+    #[Route('/cart-macro', name: 'get_cart', options: ['expose' => true])]
     public function getCart(Request $request): JsonResponse
     {
         $content = $request->getContent();
@@ -66,7 +66,7 @@ class CartController extends AbstractController
         );
     }
 
-    #[Route('/cart-front', name: 'cart_front')]
+    #[Route('/cart', name: 'cart_front')]
     public function cartFront(Request $request): Response
     {
         $cart = json_decode($this->cartManager->getCart($request->getSession()->get('cartUuid')), true);
