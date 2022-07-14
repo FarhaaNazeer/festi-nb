@@ -37,6 +37,27 @@ class FestivalType extends AbstractType
                     'class' => 'form-control'
                 ]
             ])
+
+            ->add('city', TextType::class, [
+                'label' => 'Ville',
+                'label_attr' => [
+                    'class' => 'form__label'
+                ],
+                'attr' => [
+                    'class' => 'form-control form__label'
+                ]
+            ])
+
+            ->add('country', TextType::class, [
+                'label' => 'Pays',
+                'label_attr' => [
+                    'class' => 'form__label'
+                ],
+                'attr' => [
+                    'class' => 'form-control form__label'
+                ]
+            ])
+
             ->add('short_description', TextareaType::class, [
                 'label' => 'Description courte',
                 'label_attr' => [

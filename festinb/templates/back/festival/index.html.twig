@@ -42,8 +42,8 @@
                     <td>{{ festival.created_at|date('d/m/Y') }}</td>
                     <td>{{ festival.updated_at|date('d/m/Y') }}</td>
                     <td>
-                        <a href=""><i class="fa-solid fa-pen-to-square"></i></a>
-                        <a href=""><i class="fa-solid fa-trash"></i></a>
+                        <a href="{{ path('app_back_festival_update', {'uuid' : festival.uuid}) }}"><i class="fa-solid fa-pen-to-square"></i></a>
+                        <a href="{{ path('app_back_festival_delete', {'uuid' : festival.uuid}) }}"><i class="fa-solid fa-trash"></i></a>
                     </td>
                 </tr>
             {% endfor %}
