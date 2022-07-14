@@ -38,7 +38,7 @@ class FestivalController extends AbstractController
                 $filters['end_at'] = new \DateTime($filters['end_at']);
             }
 
-            $festivals = $this->repository->findBy($filters);
+            $festivals = $this->repository->findByBetweenDate($filters);
         } else {
             $festivals = $this->repository->findAll();
         }
