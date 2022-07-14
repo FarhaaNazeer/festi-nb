@@ -22,7 +22,7 @@
         <div class="forgot-password__container">
             <div>
                 <div>
-                    {% include "reset_password/_request.html.twig" %}
+                    {% include "front/reset_password/_request.html.twig" %}
                         {% for flash_error in app.flashes('reset_password_error') %}
                             <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
                         {% endfor %}

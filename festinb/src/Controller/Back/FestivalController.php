@@ -20,7 +20,7 @@ class FestivalController extends AbstractController
         ]);
     }
 
-    #[Route('/festival/add', name: 'festival_add')]
+    #[Route('/festival/create', name: 'festival_create')]
     public function add(Request $request, ManagerRegistry $doctrine): Response
     {
         $festival = new Festival();
@@ -39,7 +39,7 @@ class FestivalController extends AbstractController
             }
         }
 
-        return $this->render('festival/add.html.twig', [
+        return $this->render('back/festival/create.html.twig', [
             'form' => $form->createView(),
         ]);
     }
