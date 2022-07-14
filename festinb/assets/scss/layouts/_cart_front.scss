@@ -53,7 +53,7 @@ h1{
             }
         }
         #delete{
-            background-color: red;
+            background-color: $sunpinkdark;
             color: $white;
             text-decoration: none;
             border: none;
@@ -65,7 +65,7 @@ h1{
             -ms-border-radius: 5px;
             -o-border-radius: 5px;
         }#delete:hover{
-            background-color: rgb(107, 13, 13);
+            background-color: $sunpinklight;
         }
         
 }
@@ -93,7 +93,7 @@ h1{
         input{
             font-size: 15px;
             color: $white;
-            background-color: green;
+            background-color: $sunyellow;
             border-radius: 5px;
             -webkit-border-radius: 5px;
             -moz-border-radius: 5px;
@@ -103,7 +103,7 @@ h1{
             border: none;
             float: right;
         } input:hover{
-            background-color: rgb(6, 71, 6);
+            background-color: $sunblue;
         }
     }
 
