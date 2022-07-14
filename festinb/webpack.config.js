@@ -38,6 +38,8 @@ Encore
     .addStyleEntry('forgot_password_scss', './assets/scss/pages/_forgot_password.scss')
     .addStyleEntry('client_area_scss', './assets/scss/layouts/_client_area.scss')
     .addStyleEntry('footer_scss', './assets/scss/layouts/_footer.scss')
+    .addStyleEntry('cart_front_scss', './assets/scss/layouts/_cart_front.scss')
+
 
 
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
