@@ -1,16 +1,20 @@
 {% extends 'back/base.html.twig' %}
 
+{% block title %} Festinb | {{ type == 'create' ? 'Ajout' : 'Modification'}} festival {% endblock %}
+
 {% block content %}
     <main>
         <div class="useful-width useful-width__white-background">
             <div class="form">
-                <h1 class="form__title">Ajout d'un nouveau festival</h1>
+                <h1 class="form__title">{{ type == 'create' ? 'Ajout' : 'Modification'}}  d'un nouveau festival</h1>
                 {{ form_start(form) }}
                 {{ form_row(form.name) }}
                 <div class="form__block">
                     {{ form_row(form.begin_at) }}
                     {{ form_row(form.end_at) }}
                 </div>
+                {{ form_row(form.city) }}
+                {{ form_row(form.country) }}
                 {{ form_row(form.short_description) }}
                 {{ form_row(form.description) }}
                 {{ form_row(form.imageFile) }}
