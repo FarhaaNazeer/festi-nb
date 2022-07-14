@@ -13,9 +13,8 @@
         <div class="container_client_area__container_toolbox">
 
             <img class="container_client_area__container_toolbox--picture_user"src="{{asset('assets/images/picture_user.png')}}" alt="picture_user">
-            <h6 class="container_client_area__container_toolbox--name">Festi'Nb</h6>
-            <h2>Espace personnelles</h2>
-
+            <h6 class="container_client_area__container_toolbox--name">{{ app.user.firstname ~ ' ' ~ app.user.lastname }}</h6>
+            <h2>Espace personnel</h2>
             <div class="container_client_area__container_toolbox--bar_link">
                 <li><a href="#">Informations personnelles</a></li>
                 <li><a href="#">Changer le mot de passe</a></li>
@@ -46,5 +45,6 @@
     </div>
 
 </div>
+
 
 {% endblock %}

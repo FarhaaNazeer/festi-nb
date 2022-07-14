@@ -9,7 +9,11 @@
             <li class="navbar__links--item"> <a href="">Partenaires</a></li>
             <li class="navbar__links--item navbar__links--icon-user">
                 <i class="fa-solid fa-user"></i>
-                <a href="{{ path('app_front_login') }}">Se connecter</a>
+                {% if app.user == null %}
+                    <a href="{{ path('app_front_login') }}">Se connecter</a>
+                {% else %}
+                    <a href="{{ path('app_front_client_area') }}">{{ app.user.firstname ~ ' ' ~ app.user.lastname }}</a>
+                {% endif %}
             </li>
         </ul>
 {#        <div class="navbar-icons">#}
