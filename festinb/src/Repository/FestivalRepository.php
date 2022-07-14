@@ -45,6 +45,24 @@ class FestivalRepository extends ServiceEntityRepository
         }
     }
 
+    public function findByBetweenDate(array $filters)
+    {
+        $qb = $this->createQueryBuilder('f');
+
+        foreach ($filters as $key => $value) {
+            if ($key === 'begin_at') {
+                $qb->andWhere('f.beginAt >= :begin_at')->setParameter('begin_at', $value);
+            } elseif ($key === 'end_at') {
+                $qb->andWhere('f.endAt <= :end_at')->setParameter('end_at', $value);
+            } else {
+                $qb->andWhere('f.' . $key . '= :' . $key)->setParameter($key, $value);
+            }
+        }
+
+        return $qb->getQuery()->getResult();
+    }
+
+
     // /**
     //  * @return FestivalFixtures[] Returns an array of FestivalFixtures objects
     //  */

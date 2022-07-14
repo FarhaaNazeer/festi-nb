@@ -4,27 +4,41 @@ namespace App\Manager\Festival;
 
 use App\Entity\Festival;
 use App\Interface\ManagerInterface;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
+
+use function PHPUnit\Framework\throwException;
 
 class FestivalManager
 {
     public function __construct(
         private HttpClientInterface $client,
-        private SerializerInterface $serializer
-    ) {}
+        private SerializerInterface $serializer,
+        private EntityManagerInterface $em
+    ) {
+    }
 
-    public function get() : array
+    public function get(array $filters = []): array
     {
+        $url = 'http://localhost/api/festivals';
+
+        if (count($filters) > 0) {
+            $url .= '?' . http_build_query($filters);
+        }
         $response =  $this->client->request(
             'GET',
-            'http://localhost/api/festivals',
+            $url
         );
 
-
-        $jsonResponse = $response->toArray();
-        return json_decode($jsonResponse[0]);
+        try {
+            $jsonResponse = $response->toArray();
+            return json_decode($jsonResponse[0]);
+        } catch (\Exception $e) {
+            throwException($e);
+            return [];
+        }
     }
 
 
