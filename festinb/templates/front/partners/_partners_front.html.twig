@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('partners_front_scss') }}
+{% endblock %}
+
+
+{% block content %}
+
+<div class="useful-width">
+
+<div class="title">
+    <h1 class="title_title">ENVIE DE DEVENIR UN PARTENAIRE DE FESTI'NB ?</h1>
+</div>
+
+
+<div class="text">
+    <p class="text_paragraphe">
+                        Être partenaire de Festi'Nb, c'est avant tout être partie prenante et participer à la réalisation d'un événement majeur dans toute la France. 
+                        <br>
+                        C'est partager, découvrir, vivre un moment à part, festif, convivial, riche en émotions.
+                        <br>
+                        <br>
+                        Être au coeur de l'événement et bénéficier d'un accueil exclusif et d'une visibilité nationale. Pour vous et vos invités, 
+                        un accès et un parking dédié loin de la foule, un espace VIP de 1000 m2 en dehors du temps.
+    </p>
+</div>
+
+
+
+
+<div class="div_title">
+    <h4 class="div_btn_title">DEVENEZ PARTENAIRE, ET PLUS QU'UN SPECTATEUR VOUS SEREZ ACTEUR !</h4>  
+</div>
+<div class="div_btn">
+    <input type="button" id="valid" value="Cliquez ici !">
+</div>
+
+
+
+    <div class="logo_partners">
+        <ul>
+            <li><img src="{{asset('assets/images/LOGO.png')}}" alt="logo"></li>
+            <li><img src="{{asset('assets/images/LOGO.png')}}" alt="logo"></li>
+            <li><img src="{{asset('assets/images/LOGO.png')}}" alt="logo"></li>
+            <li><img src="{{asset('assets/images/LOGO.png')}}" alt="logo"></li>
+            <li><img src="{{asset('assets/images/LOGO.png')}}" alt="logo"></li>
+        </ul>
+    </div>
+</div>
+
+
+
+{% endblock %}

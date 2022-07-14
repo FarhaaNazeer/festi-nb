@@ -39,6 +39,8 @@ Encore
     .addStyleEntry('client_area_scss', './assets/scss/layouts/_client_area.scss')
     .addStyleEntry('footer_scss', './assets/scss/layouts/_footer.scss')
     .addStyleEntry('cart_front_scss', './assets/scss/layouts/_cart_front.scss')
+    .addStyleEntry('partners_front_scss', './assets/scss/layouts/_partners_front.scss')
+
 
 
 
