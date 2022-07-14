@@ -82,10 +82,9 @@ let cart = () => {
         }).then(function (response){
             return response.json();
         }).then(function(data){
-
             let html = parser.parseFromString(data.html, 'text/html');
 
-            document.querySelector('.cart-modal__item').append(html.documentElement)
+            document.querySelector('.cart-modal__item').append(html.body)
             cartModal().openCartModal();
         });
     }
