@@ -46,12 +46,14 @@ class TicketType extends AbstractType
                     'class' => 'form-control'
                 ]
             ])
-//            ->add('artists')
-//            ->add('festival', EntityType::class, [
-//                'class' => Festival::class,
-//                'choice_label' => 'name',
-//                'multiple' => false
-//            ])
+            ->add('festival', EntityType::class, [
+                'class' => Festival::class,
+                'attr' => [
+                    'class' => 'ticket_festival'
+                ],
+                'choice_label' => 'name',
+                'multiple' => false
+            ])
         ;
     }
 

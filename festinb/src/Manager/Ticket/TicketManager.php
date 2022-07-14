@@ -33,7 +33,7 @@ class TicketManager
             'POST',
             self::ENDPOINT,
             [
-                'body' => $this->serializer->serialize($ticket, 'json', ['options' => 'festival_all']),
+                'body' => $this->serializer->serialize($ticket, 'json', ['options' => 'ticket_all']),
                 'headers' => [
                     'Accept' => 'application/json',
                 ]

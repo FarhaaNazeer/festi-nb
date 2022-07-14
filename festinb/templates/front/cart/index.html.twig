@@ -1,50 +1,53 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}
+    Festinb | Panier
+{% endblock %}
+
 {% block stylesheets %}
     {{ parent() }}
     {{ encore_entry_link_tags('cart_front_scss') }}
 {% endblock %}
 
-
+{% block javascripts %}
+    {{ encore_entry_script_tags('cart_js') }}
+{% endblock %}
 
 {% block content %}
-<h1>Panier</h1>
+    <h1>Panier</h1>
+    {% set totalCart = 0 %}
 
-<div class="useful-width">
-    <div class="container_card">
+    <div class="useful-width">
+        <div id="container-card" class="container_card">
+            {% if cart is not null and cart|length != 0 and cart.items|length != 0 %}
+                {#            {{ dump(cart.items) }}#}
+                {% for item in cart.items %}
+                    <div id="cart-container-{{item.uuid}}" class="container_card__item js-cart-item" data-uuid-item="{{item.uuid}}" data-uuid="{{ item.tickets.uuid }}">
+                        <li><img src="{{asset('assets/images/LOGO.png')}}" width="100px"></img></li>
+                        <li><a href="#">{{ item.tickets.title }}</a></li>
+                        <li><a href="#">Quantité</a><input class="qty-item" data-uuid-item="{{item.uuid}}" type="number" id="quantity" value="{{ item.quantity }}" name="quantity" min="1" max="5"></li>
+                        <li><a href="#"><span id="item-total-{{item.uuid}}">{{ item.itemPrice * item.quantity }}</span> €</a></li>
+                        <input type="button" class="delete-item" id="delete" data-uuid-item="{{item.uuid}}" value="Suprimer" >
+                        <input type="hidden" id="item-price-{{item.uuid}}" value="{{ item.itemPrice }}">
+                    </div>
+                    {% set totalCart = totalCart + item.itemPrice * item.quantity %}
+                {% endfor %}
 
-        <div class="container_card__item">
-                <li><img src="{{asset('assets/images/LOGO.png')}}" width="100px"></img></li>
-                <li><a href="#">Festival de Dour</a></li>
-                <li><a href="#">Quantité</a><input type="number" id="quantity" name="quantity" min="1" max="5"></li> 
-                <li><a href="#">35,00 €</a></li>
-                <input type="button" id="delete" value="Suprimer" >
+                <div id="container-total" class="container_card__itemPrice">
+                    <div class="container_card__itemPrice--price">
+                        <li><a href="#">Total</a></li>
+                        <li><a href="#"><span id="total">{{ totalCart }}</span> €</a></li>
+                    </div>
+                    {% if null == app.user %}
+                        <a href="{{ path('app_front_cart_redirect') }}" class="btn--cart-modal">Valider</a>
+                    {% else %}
+                        <input type="button" id="valid" value="valider" class="js-cart-validate" data-cart-uuid="{{ app.session.get('cartUuid') }}">
+                    {% endif %}
+                </div>
+            {% else %}
+                <p>Aucun article dans ton panier ! Ne perds pas une minute de plus :)</p>
+            {% endif %}
+
         </div>
-
-        <div class="container_card__item">
-                <li><img src="{{asset('assets/images/LOGO.png')}}" width="100px"></img></li>
-                <li><a href="#">Festival de Dour</a></li>
-                <li><a href="#">Quantité</a><input type="number" id="quantity" name="quantity" min="1" max="5"></li> 
-                <li><a href="#">35,00 €</a></li>
-                <input type="button" id="delete" value="Suprimer" >
-        </div>
-
-        <div class="container_card__item">
-                <li><img src="{{asset('assets/images/LOGO.png')}}" width="100px"></img></li>
-                <li><a href="#">Festival de Dour</a></li>
-                <li><a href="#">Quantité</a><input type="number" id="quantity" name="quantity" min="1" max="5"></li> 
-                <li><a href="#">35,00 €</a></li>
-                <input type="button" id="delete" value="Suprimer" >
-        </div>
-
-        <div class="container_card__itemPrice">
-            <div class="container_card__itemPrice--price">
-                <li><a href="#">Total</a></li>
-                <li><a href="#">145,56 €</a></li>
-            </div>
-            <input type="button" id="valid" value="valider" >
-        </div>
-
     </div>
-</div>
 {% endblock %}

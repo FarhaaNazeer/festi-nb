@@ -5,6 +5,7 @@ namespace App\Manager\Cart;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
+use function PHPUnit\Framework\throwException;
 
 class CartManager
 {
@@ -45,6 +46,27 @@ class CartManager
         );
 
         return $response->toArray();
+    }
+
+    public function validateCart(array $data)
+    {
+        $response = $this->client->request(
+            'PUT',
+            self::ENDPOINT.'validate',
+            [
+                'json' => $data,
+                'headers' => [
+                    'Accept' => 'application/json',
+                ]
+            ]
+        );
+
+        try {
+            return $response->toArray();
+        } catch (\Exception $e) {
+            throwException($e);
+        }
+
     }
 
     public function update()
