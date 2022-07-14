@@ -6,7 +6,7 @@
         <ul id="navLinks" class="navbar__links">
             <li class="navbar__links--item"> <a href="{{ path('app_front_home') }}">Accueil</a></li>
             <li class="navbar__links--item"> <a href="{{ path('app_front_festivals') }}">Festivals</a></li>
-            <li class="navbar__links--item"> <a href="">Partenaires</a></li>
+            <li class="navbar__links--item"> <a href="{{ path('app_front_partner') }}">Partenaires</a></li>
             <li class="navbar__links--item navbar__links--icon-user">
                 <i class="fa-solid fa-user"></i>
                 {% if app.user == null %}
