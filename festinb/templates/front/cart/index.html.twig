@@ -9,38 +9,27 @@
 
 {% block content %}
 <h1>Panier</h1>
+ {% set totalCart = 0 %}
 
 <div class="useful-width">
     <div class="container_card">
 
-        <div class="container_card__item">
-                <li><img src="{{asset('assets/images/LOGO.png')}}" width="100px"></img></li>
-                <li><a href="#">Festival de Dour</a></li>
-                <li><a href="#">Quantité</a><input type="number" id="quantity" name="quantity" min="1" max="5"></li> 
-                <li><a href="#">35,00 €</a></li>
-                <input type="button" id="delete" value="Suprimer" >
-        </div>
 
-        <div class="container_card__item">
+        {% for item in cart.items %}
+            <div class="container_card__item">
                 <li><img src="{{asset('assets/images/LOGO.png')}}" width="100px"></img></li>
-                <li><a href="#">Festival de Dour</a></li>
-                <li><a href="#">Quantité</a><input type="number" id="quantity" name="quantity" min="1" max="5"></li> 
-                <li><a href="#">35,00 €</a></li>
+                <li><a href="#">{{ item.tickets.title }}</a></li>
+                <li><a href="#">Quantité</a><input type="number" id="quantity" value="{{ item.quantity }}" name="quantity" min="1" max="5"></li> 
+                <li><a href="#">{{ item.itemPrice * item.quantity }} €</a></li>
                 <input type="button" id="delete" value="Suprimer" >
-        </div>
-
-        <div class="container_card__item">
-                <li><img src="{{asset('assets/images/LOGO.png')}}" width="100px"></img></li>
-                <li><a href="#">Festival de Dour</a></li>
-                <li><a href="#">Quantité</a><input type="number" id="quantity" name="quantity" min="1" max="5"></li> 
-                <li><a href="#">35,00 €</a></li>
-                <input type="button" id="delete" value="Suprimer" >
-        </div>
-
+            </div>
+            {% set totalCart = totalCart + item.itemPrice * item.quantity %}
+        {% endfor %} 
+       
         <div class="container_card__itemPrice">
             <div class="container_card__itemPrice--price">
                 <li><a href="#">Total</a></li>
-                <li><a href="#">145,56 €</a></li>
+                <li><a href="#">{{ totalCart }} €</a></li>
             </div>
             <input type="button" id="valid" value="valider" >
         </div>

@@ -25,7 +25,7 @@ let cart = () => {
                     throw new Error('Please add a minimun quantity of 1');
                 }
 
-                let cartUuid = localStorage.getItem('cartUuid');
+                let cartUuid = sessionStorage.getItem('cartUuid');
 
                 if (!cartUuid) {
                     self.createCart(ticketUuid, quantity);
@@ -58,7 +58,7 @@ let cart = () => {
         }).then(function (response) {
                return response.json();
         }).then(function (data){
-            localStorage.setItem('cartUuid', data.uuid);
+            sessionStorage.setItem('cartUuid', data.uuid);
             self.addItemToCart(data.uuid, ticketUuid, quantity);
         });
     }
