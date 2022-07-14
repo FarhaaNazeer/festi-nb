@@ -3,7 +3,7 @@
 {% block form_row %}
     <div class="form__row">
         {{- form_label(form) -}}
-        {{- form_widget(form) -}}
+        {{- form_widget(form, {'attr' : {'class' : 'form__input'}}) -}}
         {{- form_errors(form) -}}
         {{- form_help(form) -}}
     </div>

@@ -31,6 +31,8 @@ class FestivalAssembler extends AbstractAssembler
             $festivalDto->country               = $festival->getCountry();
             $festivalDto->image                 = $festival->getImageFile();
             $festivalDto->tickets               = $this->ticketAssembler->transformArray($festival->getTicket());
+            $festivalDto->created_at            = $festival->getCreatedAt();
+            $festivalDto->updated_at            = $festival->getUpdatedAt();
 
             return $festivalDto;
         }

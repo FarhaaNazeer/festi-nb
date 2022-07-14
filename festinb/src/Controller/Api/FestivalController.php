@@ -22,11 +22,27 @@ class FestivalController extends AbstractController
         private FestivalAssembler $festivalAssembler,
         private SerializerInterface $serializer,
         private  EntityManagerInterface $entityManager
-    ) {
-    }
+    ) {}
 
     #[Route('/festivals', name: 'festivals', methods: ['GET'])]
-    public function getFestivals(Request $request): JsonResponse
+    public function getFestivals() : JsonResponse
+    {
+        $festivals = $this->festivalAssembler->transformArray( $this->repository->findAll());
+
+        return new JsonResponse([
+           $this->serializer->serialize(
+               $festivals,
+               'json',
+               ['groups' => 'festival_all']
+           ),
+            Response::HTTP_OK,
+            ['Content-Type' => 'application/json;charset=UTF-8'],
+            true
+        ]);
+    }
+
+    #[Route('/festivals/filtered', name: 'festivals_filtered', methods: ['GET'])]
+    public function getFilteredFestivals(Request $request): JsonResponse
     {
         $filters = $request->query->all();
         if (count($filters) > 0) {

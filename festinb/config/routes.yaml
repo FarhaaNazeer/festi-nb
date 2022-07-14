@@ -15,6 +15,10 @@ controllers_api:
     prefix: api
     name_prefix: api_
 
+controllers_admin:
+    resource: ../src/Controller/Admin
+    type: annotation
+
 kernel:
     resource: ../src/Kernel.php
     type: annotation

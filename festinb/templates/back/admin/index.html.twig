@@ -1,0 +1,147 @@
+{% extends 'back/base.html.twig' %}
+
+{% block title %}Hello AdminControlleController!{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('cards_back') }}
+    {{ encore_entry_link_tags('card_back') }}
+    {{ encore_entry_link_tags('recent_grid') }}
+{% endblock %}
+
+
+{% block content %}
+<main>
+    <div class="cards">
+        <div class="cards__single">
+            <div>
+                <h1>54</h1>
+                <span>Festivals</span>
+            </div>
+            <div>
+                <span class="las la-users"></span>
+            </div>
+        </div>
+        <div class="cards__single">
+            <div>
+                <h1>110</h1>
+                <span>Billets</span>
+            </div>
+            <div>
+                <span class="las la-clipboard-list"></span>
+            </div>
+        </div>
+        <div class="cards__single">
+            <div>
+                <h1>25</h1>
+                <span>Réservations</span>
+            </div>
+            <div>
+                <span class="lab la-google-wallet"></span>
+            </div>
+        </div>
+        <div class="cards__single">
+            <div>
+                <h1>45</h1>
+                <span>Partenaires</span>
+            </div>
+            <div>
+                <span class="las la-receipt"></span>
+            </div>
+        </div>
+        <div class="cards__single">
+            <div>
+                <h1>60</h1>
+                <span>Utilisateurs</span>
+            </div>
+            <div>
+                <span class="las la-user-circle"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="recent-grid">
+        <div class="festivals">
+            <div class="card">
+                <div class="card__header">
+                    <h2>Recents festivals</h2>
+                    <i class="las la-arrow-right"></i>
+                    <button class="btn--dashboard">Voir tous</button>
+                </div>
+                <div class="card__body">
+                    <table width="100%">
+                        <thead>
+                            <tr>
+                                <td>Nom du festival</td>
+                                <td>Date de début</td>
+                                <td>Date de fin</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Test</td>
+                                <td>Test</td>
+                                <td>
+                                    <i class="status">Pending</i>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Test</td>
+                                <td>Test</td>
+                                <td>
+                                    <i class="status">Pending</i>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Test</td>
+                                <td>Test</td>
+                                <td>
+                                    <i class="status">Pending</i>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+        </div>
+    </div>
+        <div class="customers">
+            <div class="card">
+                <div class="card__header">
+                    <h2>Recents clients</h2>
+                    <i class="las la-arrow-right"></i>
+                    <button class="btn--dashboard">Voir tous</button>
+                </div>
+                <div class="card__body">
+                    <div class="customer">
+                        <h4>Angelina Jolie</h4>
+                        <small>Green Festival</small>
+                    </div>
+                    <div>
+                        <span class="las la-user-circle"></span>
+                        <span class="las la-comment"></span>
+                        <span class="las la-phone"></span>
+                    </div>
+                    <div class="customer">
+                        <h4>Angelina Jolie</h4>
+                        <small>Green Festival</small>
+                    </div>
+                    <div>
+                        <span class="las la-user-circle"></span>
+                        <span class="las la-comment"></span>
+                        <span class="las la-phone"></span>
+                    </div>
+                    <div class="customer">
+                        <h4>Angelina Jolie</h4>
+                        <small>Green Festival</small>
+                    </div>
+                    <div>
+                        <span class="las la-user-circle"></span>
+                        <span class="las la-comment"></span>
+                        <span class="las la-phone"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

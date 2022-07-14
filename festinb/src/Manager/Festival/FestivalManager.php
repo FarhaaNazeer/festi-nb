@@ -15,14 +15,29 @@ class FestivalManager
 {
     public function __construct(
         private HttpClientInterface $client,
-        private SerializerInterface $serializer,
-        private EntityManagerInterface $em
-    ) {
+    ) {}
+
+    public const ENDPOINT = 'http://localhost/api/festivals';
+
+    public function getFestivals()
+    {
+        $response = $this->client->request(
+            'GET',
+            self::ENDPOINT
+        );
+
+        try {
+            $jsonResponse = $response->toArray(true);
+            return json_decode($jsonResponse[0]);
+        }  catch (\Exception $e) {
+            throwException($e);
+            return [];
+        }
     }
 
-    public function get(array $filters = []): array
+    public function getFilteredFestival(array $filters = []): array
     {
-        $url = 'http://localhost/api/festivals';
+        $url = self::ENDPOINT.'/filtered';
 
         if (count($filters) > 0) {
             $url .= '?' . http_build_query($filters);

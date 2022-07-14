@@ -11,11 +11,22 @@ use Symfony\Component\Routing\Annotation\Route;
 class FestivalController extends AbstractController
 {
     public function __construct(private FestivalManager $manager)
+    {}
+
+
+    #[Route('festivals', name: 'festivals')]
+    public function index() : Response
     {
+        $festivals = $this->manager->getFestivals();
+//        dd($festivals);
+
+        return $this->render('front/festival/index.html.twig', [
+            'festivals' => $festivals
+        ]);
     }
 
-    #[Route('/festivals', name: 'festivals')]
-    public function index(Request $request): Response
+    #[Route('filtered/festivals', name: 'filtered_festivals')]
+    public function getFilteredFestivals(Request $request): Response
     {
         if ($request->isMethod('POST')) {
             $formData = $request->request->all()['search_bar_form'];
@@ -24,11 +35,10 @@ class FestivalController extends AbstractController
                     unset($formData[$key]);
                 }
             }
-            $festivals = $this->manager->get($formData);
+            $festivals = $this->manager->getFilteredFestival($formData);
         } else {
-            $festivals = $this->manager->get();
+            $festivals = $this->manager->getFilteredFestival();
         }
-        // $festivals = $this->manager->get();
 
         return $this->render('front/festival/index.html.twig', [
             'festivals' => $festivals

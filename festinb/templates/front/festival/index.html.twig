@@ -13,7 +13,6 @@
 {% block content %}
     <div class="content">
         <div class="festivals">
-{#            <h1 class="festivals__title">Tous les festivals</h1>#}
             {% set image =  "https://images.unsplash.com/photo-1510673398445-94f476ef2cbc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1172&q=80" %}
             {% include 'components/festival/banner_title.html.twig' with {'title' : 'Tous les festivals', 'image' : image } %}
             <div class="useful-width">
@@ -42,7 +41,6 @@
                                 <div class="festival__body">
                                     <div class="festival__body--title">{{ festival.name }}</div>
                                     <div class="festival__body--subtitle">{{ festival.city }} , {{ festival.country }} | {{ festival.begin_at|date('d') }}-{{ festival.end_at|date('d') }}/{{ festival.end_at|date('m') }}/{{ festival.end_at|date('Y') }}</div>
-{#                                    <div class="festival__body--description">{{ festival.description }}</div>#}
                                 </div>
                                 <div class="festival__footer">
                                     <div class="festival__footer--price">A partir de : 99.00€</div>

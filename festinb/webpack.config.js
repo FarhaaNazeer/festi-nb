@@ -21,12 +21,21 @@ Encore
      * and one CSS file (e.g. app.scss) if your JavaScript imports CSS.
      */
     .addEntry('app', './assets/js/app.js')
+    .addEntry('app_back', './assets/back/js/app.js')
     // JS Entry
     .addEntry('homepage_slider_js', './assets/js/components/homepage_slider.js')
     .addEntry('login_js', './assets/js/pages/_login.js')
 
 
     //SCSS Entry
+    //Back
+    .addStyleEntry('app_back_scss', './assets/back/scss/app.scss')
+    .addStyleEntry('cards_back', './assets/back/scss/components/_cards.scss')
+    .addStyleEntry('card_back', './assets/back/scss/components/_card.scss')
+    .addStyleEntry('recent_grid', './assets/back/scss/components/_recent_grid.scss')
+    .addStyleEntry('listing', './assets/back/scss/pages/listing.scss')
+
+    // Front
     .addStyleEntry('homepage_slider_scss', './assets/scss/components/_homepage_slider.scss')
     .addStyleEntry('homepage_search_bar_scss', './assets/scss/components/_homepage_search_bar.scss')
     .addStyleEntry('filters_scss', './assets/scss/components/_filters.scss')
@@ -40,6 +49,10 @@ Encore
     .addStyleEntry('footer_scss', './assets/scss/layouts/_footer.scss')
     .addStyleEntry('cart_front_scss', './assets/scss/layouts/_cart_front.scss')
     .addStyleEntry('partners_front_scss', './assets/scss/layouts/_partners_front.scss')
+    .addStyleEntry('login_admin_scss', './assets/scss/pages/_login_admin.scss')
+    .addStyleEntry('login_partenaire_scss', './assets/scss/pages/_login_partenaire.scss')
+
+
 
 
 
