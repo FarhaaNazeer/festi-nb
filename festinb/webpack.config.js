@@ -25,7 +25,7 @@ Encore
     // JS Entry
     .addEntry('homepage_slider_js', './assets/js/components/homepage_slider.js')
     .addEntry('login_js', './assets/js/pages/_login.js')
-
+    .addEntry('cart_js', './assets/js/pages/cart.js')
 
     //SCSS Entry
     //Back
