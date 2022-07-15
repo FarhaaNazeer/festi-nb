@@ -2,7 +2,6 @@
 
 namespace App\Controller\Front;
 
-use App\Manager\Cart\CartItemManager;
 use App\Manager\Cart\CartManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -18,8 +17,7 @@ class CartController extends AbstractController
 {
     private $session;
     public function __construct(
-        public CartManager $cartManager,
-        public CartItemManager $cartItemManager,
+        public CartManager $cartManager
     ) {
         $this->session = new Session(new NativeSessionStorage(), new AttributeBag());
     }
@@ -67,18 +65,6 @@ class CartController extends AbstractController
                 'html' => $this->render('front/macro/cart.html.twig', ['cart' => $cart])->getContent()
             ]
         );
-    }
-
-    #[Route('/cart/delete', name: 'delete_cart', methods: ['POST'], options: ['expose' => true])]
-    public function deleteCartItem(Request $request): Response
-    {
-        $content = $request->getContent();
-
-        $cartUuid = json_decode($content, true, JSON_THROW_ON_ERROR);
-
-        $response = $this->cartItemManager->delete($cartUuid['ticket']['uuid']);
-
-        return $response;
     }
 
     #[Route('/cart', name: 'cart_front')]
