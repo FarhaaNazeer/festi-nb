@@ -3,6 +3,7 @@
 namespace App\Controller\Front;
 
 use App\DoctrineManager\Cart\DoctrineCartManager;
+use App\Entity\CartItem;
 use App\Manager\Cart\CartItemManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -15,6 +16,7 @@ class CartItemController extends AbstractController
 {
     public function __construct(
         private CartItemManager $cartItemManager,
+        private EntityManagerInterface $em
     ){}
 
     #[Route('/add-item', name: 'add_item', options: ['expose' => true])]

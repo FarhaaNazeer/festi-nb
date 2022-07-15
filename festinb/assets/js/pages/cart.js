@@ -55,6 +55,28 @@ let cart = () => {
         }
     }
 
+    self.validateCart = (cartUuid) => {
+
+        document.querySelectorAll('.js-cart-item').forEach((item)=>{
+
+            let itemUuid = item.dataset.uuid;
+            let itemQuantity = item.querySelector('input').value;
+
+            let cart = {
+                'cart' :{
+                    'uuid' : cartUuid
+                },
+                'tickets' :  {
+                    'uuid' : itemUuid,
+                },
+                'quantity' : parseInt(itemQuantity)
+            }
+
+            self.sendRequest('app_front_cart_items_validate', cart);
+            // self.sendRequest('app_front_cart_validate', cart);
+        });
+    };
+
     self.updateCart = () => {
         for (let i = 0; i < qtyInputs.length; i++) {
             const element = qtyInputs[i];
