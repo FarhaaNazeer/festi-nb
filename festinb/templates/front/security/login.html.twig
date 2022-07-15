@@ -31,7 +31,7 @@
                 {% include 'front/security/_login_macro.html.twig' %}
             </div>
             <div class="login--signup">
-                {% include 'front/registration/_register_macro.html.twig' with {'form' : form} %}
+                {% include 'front/registration/_register_macro.html.twig' with {'form' : form, 'type' : 'guest'} %}
             </div>
         </div>
         <div class="login--slide-tab"></div>

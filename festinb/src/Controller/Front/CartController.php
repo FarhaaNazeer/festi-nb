@@ -76,7 +76,7 @@ class CartController extends AbstractController
             $cart = json_decode($this->cartManager->getCart($request->getSession()->get('cartUuid')), true);
         }
 
-        return $this->render('front/cart/index.html.twig', ['cart' => $cart]);
+        return $this->render('front/cart/login.html.twig', ['cart' => $cart]);
     }
 
     #[Route('/cart/redirect', name: 'cart_redirect')]

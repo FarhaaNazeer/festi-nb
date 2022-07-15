@@ -28,7 +28,7 @@ class FestivalController extends AbstractController
     {
         $festivals = $this->festivalManager->getFestivals();
 
-        return $this->render('back/festival/index.html.twig', [
+        return $this->render('back/festival/login.html.twig', [
             'festivals' => $festivals,
         ]);
     }

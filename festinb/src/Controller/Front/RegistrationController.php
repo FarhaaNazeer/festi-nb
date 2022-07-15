@@ -33,7 +33,9 @@ class RegistrationController extends AbstractController
         $user = new User();
         $entityManager = $doctrine->getManager();
         $form = $this->createForm(RegistrationFormType::class, $user);
+
         $form->handleRequest($request);
+        dd($form->getData());
 
         if ($form->isSubmitted() && $form->isValid()) {
             // encode the plain password

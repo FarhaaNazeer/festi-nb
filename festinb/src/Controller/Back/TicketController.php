@@ -31,7 +31,7 @@ class TicketController extends  AbstractController
     {
         $tickets = $this->ticketRepository->findAll();
 
-        return $this->render('back/ticket/index.html.twig', [
+        return $this->render('back/ticket/login.html.twig', [
             'tickets' => $tickets
         ]);
     }

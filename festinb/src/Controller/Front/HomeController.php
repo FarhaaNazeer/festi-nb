@@ -14,7 +14,7 @@ class HomeController extends AbstractController
     {
         $formSearch = $this->createForm(SearchBarFormType::class);
 
-        return $this->render('front/home/index.html.twig', [
+        return $this->render('front/home/login.html.twig', [
             'formSearch' => $formSearch->createView()
         ]);
     }

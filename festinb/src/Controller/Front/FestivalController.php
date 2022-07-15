@@ -20,7 +20,7 @@ class FestivalController extends AbstractController
         $festivals = $this->manager->getFestivals();
 //        dd($festivals);
 
-        return $this->render('front/festival/index.html.twig', [
+        return $this->render('front/festival/login.html.twig', [
             'festivals' => $festivals
         ]);
     }
@@ -40,7 +40,7 @@ class FestivalController extends AbstractController
             $festivals = $this->manager->getFilteredFestival();
         }
 
-        return $this->render('front/festival/index.html.twig', [
+        return $this->render('front/festival/login.html.twig', [
             'festivals' => $festivals
         ]);
     }
