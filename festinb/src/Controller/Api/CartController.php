@@ -48,9 +48,14 @@ class CartController extends AbstractController
     }
 
     #[Route('/cart/{uuid}', name: 'cart', methods: ['GET'])]
-    public function getCart(Cart $cart): JsonResponse
+    public function getCart(string $uuid, EntityManagerInterface $em): JsonResponse
     {
-        $cartDto = $this->cartAssembler->transform($cart);
+        $cart = $em->getRepository(Cart::class)->findBy(['uuid' => $uuid])[0];
+        if ($cart === null) {
+            $cartDto = [];
+        } else {
+            $cartDto = $this->cartAssembler->transform($cart);
+        }
 
         return new JsonResponse([
             $this->serializer->serialize(
