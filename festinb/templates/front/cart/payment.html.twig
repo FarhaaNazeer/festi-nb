@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
+  <form>
+    <div id="card-element"></div>
+
+    <script scr="https://js.stripe.com/v3/"></script>
+
+    <div id="card-errors" role="alert"></div>
+    <button type="submit">Submit Payment</button>
+  </form>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{parent()}}
+
+    <script>
+        {% if app_environment == 'dev' %}
+            let stripeToken = "{{ stripe_public_key_test }}";
+        {% else %}
+           let stripeToken = "{{ stripe_public_key_test }}";
+        {% endif %}
+
+        var stripe = Stripe(stripeToken);
+        var elements = stripe.elements();
+        var subscription = "{{ cartItem.id }}";
+        var clientSecret = "{{ intentSecret }}";
+
+    </script>
+
+{% endblock %}

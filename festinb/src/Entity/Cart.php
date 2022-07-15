@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\CartRepository;
 use App\Traits\EntityIdTrait;
+use App\Traits\StripeTrait;
 use App\Traits\TimestampTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -14,6 +15,7 @@ class Cart
 {
     use EntityIdTrait;
     use TimestampTrait;
+    use StripeTrait;
 
     #[ORM\Id]
     #[ORM\GeneratedValue]

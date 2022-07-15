@@ -74,9 +74,9 @@ class CartItemManager
 
         $cart->setBrandStripe($ressource['stripeBrand']);
         $cart->setLast4Stripe($ressource['stripeLast4']);
-        $cart->setIdStripe($ressource['stripeId']);
+        $cart->setIdChargeStripe($ressource['stripeId']);
         $cart->setStatusStripe($ressource['stripeStatus']);
-        $cart->setTokenStripe($ressource['stripeToken']);
+        $cart->setStripeToken($ressource['stripeToken']);
         $cart->setUpdatedAt(new \DateTime());
 
         $this->em->persist($cart);

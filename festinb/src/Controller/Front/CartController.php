@@ -2,6 +2,7 @@
 
 namespace App\Controller\Front;
 
+use App\Manager\Cart\CartItemManager;
 use App\Manager\Cart\CartManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -17,7 +18,8 @@ class CartController extends AbstractController
 {
     private $session;
     public function __construct(
-        public CartManager $cartManager
+        public CartManager $cartManager,
+        public CartItemManager $cartItemManager
     ) {
         $this->session = new Session(new NativeSessionStorage(), new AttributeBag());
     }
@@ -76,7 +78,21 @@ class CartController extends AbstractController
             $cart = json_decode($this->cartManager->getCart($request->getSession()->get('cartUuid')), true);
         }
 
-        return $this->render('front/cart/index.html.twig', ['cart' => $cart]);
+        $user = $this->getUser();
+
+        if ($request->isMethod('POST')) {
+            $ressource = $this->cartItemManager->stripe($_POST, $cart);
+
+            if (null !== $ressource) {
+                $this->cartItemManager->createSubscription($ressource, $cart, $user);            
+            } 
+        }
+        
+
+        return $this->render('front/cart/index.html.twig', [
+            'cart' => $cart,
+            'intentSecret' => $this->cartItemManager->intentSecret($cart),
+        ]);
     }
 
     #[Route('/cart/redirect', name: 'cart_redirect')]
