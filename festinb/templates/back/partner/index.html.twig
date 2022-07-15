@@ -1,0 +1,48 @@
+{% extends 'back/base.html.twig' %}
+
+{% block title %}Admin | Partenaires{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('listing') }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
+<main>
+    <div class="useful-width useful-width__white-background">
+        <div class="listing">
+            <h1>Tous les partenaires</h1>
+            <a href="{{ path('app_back_partner_create') }}" class="btn--dashboard">Ajouter</a>
+        </div>
+        <table id="datatable" class="display">
+            <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Prénom</th>
+                    <th>Adresse e-mail</th>
+{#                    <th>Rôle</th>#}
+                </tr>
+            </thead>
+            <tbody>
+            {% for partner in partners %}
+                <tr>
+                    <td>{{ partner.firstname }}</td>
+                    <td>{{ partner.lastname }}</td>
+                    <td>{{ partner.email }}</td>
+{#                    <td>{{ partner.roles }}</td>#}
+
+                    <td>
+                        <a href="{{ path('app_back_partner_update', {'uuid' : partner.uuid}) }}"><i class="fa-solid fa-pen-to-square"></i></a>
+                        <a href="{{ path('app_back_partner_delete', {'uuid' : partner.uuid}) }}"><i class="fa-solid fa-trash"></i></a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</main>
+{% endblock %}
