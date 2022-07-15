@@ -7,17 +7,10 @@ let cart = () => {
 
     let self = {};
     let parser = new DOMParser();
-    let cartBtnValidate = document.querySelector('.js-cart-validate');
-
 
     self.init = () => {
         self.targetBtnAddToCart();
         self.targetCloseModalBtn();
-
-        cartBtnValidate.addEventListener('click', (event) => {
-            let cartUuid = event.target.dataset.cartUuid;
-            self.validateCart(cartUuid)
-        });
     }
 
     self.targetBtnAddToCart = () => {
