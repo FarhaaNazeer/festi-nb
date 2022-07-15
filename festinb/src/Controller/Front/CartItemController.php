@@ -35,4 +35,26 @@ class CartItemController extends AbstractController
             $cartItem
         );
     }
+
+    #[Route('/cart/items/validate', name: 'cart_items_validate', options: ['expose' => true])]
+    public function cartItemsValidate(Request $request)
+    {
+        $content = $request->getContent();
+        $data = json_decode($content, true, JSON_THROW_ON_ERROR);
+//        dd($data);
+
+        $response = $this->cartItemManager->post($data);
+
+        if (Response::HTTP_CREATED !== $response[1]) {
+            throw new \Exception('La commande n\'a pas pu être validée', $response[1]);
+        }
+
+        $cart = json_decode($response[0], true);
+        dd($cart);
+
+        return new JsonResponse(
+            $cart,
+            Response::HTTP_OK
+        );
+    }
 }

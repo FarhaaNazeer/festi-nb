@@ -30,6 +30,17 @@
     padding: 7px;
   }
 
+  &--cart-modal {
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+    background: $sunyellow;
+    padding: 0.9em 2em;
+    color: white;
+    border-radius: 10px;
+    cursor:pointer;
+    font-weight: 700;
+  }
+
 }
 
 // Google

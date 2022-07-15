@@ -8,12 +8,18 @@
             <li class="navbar__links--item"> <a href="{{ path('app_front_festivals') }}">Festivals</a></li>
             <li class="navbar__links--item"> <a href="{{ path('app_front_partners') }}">Partenaires</a></li>
             <li class="navbar__links--item navbar__links--icon-user">
-                <i class="fa-solid fa-user"></i>
                 {% if app.user == null %}
+                    <i class="fa-solid fa-circle-user"></i>
                     <a href="{{ path('app_front_login') }}">Se connecter</a>
                 {% else %}
-                    <a href="{{ path('app_front_client_area') }}">{{ app.user.firstname ~ ' ' ~ app.user.lastname }}</a>
+                    <a href="{{ path('app_front_client_area') }}">
+                        <i class="fa-solid fa-user"></i>
+                        {{ app.user.firstname }} !
+                    </a>
                 {% endif %}
+                <a href="{{ path('app_front_cart_front') }}">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                </a>
             </li>
         </ul>
 {#        <div class="navbar-icons">#}

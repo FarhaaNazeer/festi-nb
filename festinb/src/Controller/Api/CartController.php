@@ -83,4 +83,10 @@ class CartController extends AbstractController
            return $this->json($e->getMessage(), $e->getCode());
         }
     }
+
+    #[Route('/carts/validate', name: 'cartValidate', methods: ['PUT'])]
+    public function cartValidate(CartDto $cartDto): JsonResponse
+    {
+
+    }
 }
