@@ -47,15 +47,16 @@ class TicketController extends AbstractController
     {
         $ticketDto = $this->serializer->deserialize($request->getContent(), TicketDto::class, 'json');
 
-        $ticket = $this->ticketAssembler->reverseTransform($ticketDto);
+                $ticket = $this->ticketAssembler->reverseTransform($ticketDto);
 
         $this->entityManager->persist($ticket);
         $this->entityManager->flush();
 
         return new JsonResponse([
             $this->serializer->serialize(
-                $this->ticketAssembler->transform($ticket),
-                'json'
+                $this->ticketAssembler->transform($ticketDto),
+                'json',
+                ['groups' => 'ticket_all']
             ),
             Response::HTTP_CREATED,
             ['Content-Type' => 'application/json'],

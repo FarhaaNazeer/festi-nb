@@ -1,12 +1,38 @@
-{% extends 'base.html.twig' %}
+{% extends 'back/base.html.twig' %}
 
 {% block content %}
-    {% for ticket in tickets %}
-    <ul>
-        <li>{{ ticket.title }}</li>
-        <li>{{ ticket.startDate }}</li>
-        <li>{{ ticket.endDate }}</li>
-        <li>{{ ticket.price }}</li>
-    </ul>
-    {% endfor %}
+<main>
+    {% include 'back/_addFlashes.html.twig' %}
+    <div class="useful-width useful-width__white-background">
+        <div class="listing">
+            <h1>Tous les festivals</h1>
+            <a href="{{ path('app_back_ticket_create') }}" class="btn--dashboard">Ajouter</a>
+        </div>
+        <table id="datatable" class="display">
+            <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Date de début</th>
+                    <th>Date de fin</th>
+                    <th>Prix</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for ticket in tickets %}
+                <tr>
+                    <td>{{ ticket.title }}</td>
+                    <td>{{ ticket.startDate|date('d/m/Y') }}</td>
+                    <td>{{ ticket.endDate|date('d/m/Y') }}</td>
+                    <td>{{ ticket.price  }}</td>
+                    <td>
+                        <a href="{{ path('app_back_ticket_update', {'uuid' : ticket.uuid}) }}"><i class="fa-solid fa-pen-to-square"></i></a>
+                        <a href="{{ path('app_back_ticket_delete', {'uuid' : ticket.uuid}) }}"><i class="fa-solid fa-trash"></i></a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</main>
 {% endblock %}
