@@ -96,6 +96,8 @@ class FestivalController extends AbstractController
         $manager->remove($festival);
         $manager->flush();
 
+        $this->addFlash('success', 'Le festival a été supprimé avec succès');
+
         return $this->redirectToRoute('app_back_festivals');
     }
 }

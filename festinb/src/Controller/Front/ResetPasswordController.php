@@ -84,6 +84,7 @@ class ResetPasswordController extends AbstractController
             // loaded in a browser and potentially leaking the token to 3rd party JavaScript.
             $this->storeTokenInSession($token);
 
+            $this->addFlash('error', 'Your password is incorrect. Try again.');
             return $this->redirectToRoute('app_front_reset_password');
         }
 
@@ -123,7 +124,8 @@ class ResetPasswordController extends AbstractController
 
             // The session is cleaned up after the password has been changed.
             $this->cleanSessionAfterReset();
-
+            
+            $this->addFlash('success', 'Bienvenue sur FestinB!');
             return $this->redirectToRoute('app_front_home');
         }
 
@@ -140,6 +142,9 @@ class ResetPasswordController extends AbstractController
 
         // Do not reveal whether a user account was found or not.
         if (!$user) {
+
+            $this->addFlash('error', 'Aucun utilisateur trouvé pour cet e-mail.');
+
             return $this->redirectToRoute('app_front_check_email');
         }
 
@@ -155,6 +160,8 @@ class ResetPasswordController extends AbstractController
             //     $translator->trans(ResetPasswordExceptionInterface::MESSAGE_PROBLEM_HANDLE, [], 'ResetPasswordBundle'),
             //     $translator->trans($e->getReason(), [], 'ResetPasswordBundle')
             // ));
+
+            $this->addFlash('warning', 'Vérifiez votre mot de passe.');
 
             return $this->redirectToRoute('app_front_check_email');
         }
@@ -172,6 +179,8 @@ class ResetPasswordController extends AbstractController
 
         // Store the token object in session for retrieval in check-email route.
         $this->setTokenObjectInSession($resetToken);
+
+        $this->addFlash('success', 'Vérifiez votre boîte mail pour réinitialiser votre mot de passe.');
 
         return $this->redirectToRoute('app_front_check_email');
     }

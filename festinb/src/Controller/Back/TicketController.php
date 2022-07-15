@@ -45,6 +45,8 @@ class TicketController extends  AbstractController
                     throw new \Exception('Une erreur est survenue', $responseStatusCode);
                 }
 
+                $this->addFlash('success', 'Le ticket a été créé avec succès');
+
                 $this->redirectToRoute('app_back_ticket_create');
             }
         }
