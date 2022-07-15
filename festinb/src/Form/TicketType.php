@@ -21,25 +21,46 @@ class TicketType extends AbstractType
                 'label' => 'Nom du billet',
                 'attr' => [
                     'class' => 'form-control'
-                ]
+                ],
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Veuillez entrer le nom du billet',
+                    ])
+                ],
+
             ])
             ->add('start_date', DateType::class, [
                 'label' => 'Date de début',
                 'attr' => [
                     'class' => 'form-control'
-                ]
+                ],
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Veuillez entrer la date de début',
+                    ])
+                ],
             ])
             ->add('end_date', DateType::class, [
                 'label' => 'Date de fin',
                 'attr' => [
                     'class' => 'form-control'
-                ]
+                ],
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Veuillez entrer la date de fin',
+                    ])
+                ],
             ])
             ->add('price', NumberType::class, [
                 'label' => 'Prix',
                 'attr' => [
                     'class' => 'form-control'
-                ]
+                ],
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Veuillez entrer le prix',
+                    ])
+                ],
             ])
             ->add('description', TextareaType::class, [
                 'attr' => [

@@ -22,7 +22,8 @@ class SearchBarFormType extends AbstractType
                 'attr' => [
                     'placeholder' => 'Ville',
                     'class' => 'input input__small search-bar__input'
-                ]
+                ],
+
             ])
             ->add('begin_at', DateType::class, [
                 'label' => false,

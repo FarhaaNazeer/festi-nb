@@ -9,6 +9,8 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
 use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class FestivalType extends AbstractType
@@ -23,19 +25,34 @@ class FestivalType extends AbstractType
                 ],
                 'attr' => [
                     'class' => 'form-control form__label'
-                ]
+                ],
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Veuillez entrer un nom de festival',
+                    ])
+                ],
             ])
             ->add('begin_at', DateType::class, [
                 'label' => 'Date de début',
                 'attr' => [
                     'class' => 'form-control'
-                ]
+                ],
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Veuillez ajouter une date de début',
+                    ])
+                ],
             ])
             ->add('end_at', DateType::class, [
                 'label' => 'Date de fin',
                 'attr' => [
                     'class' => 'form-control'
-                ]
+                ],
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Veuillez ajouter une date de début',
+                    ])
+                ],
             ])
 
             ->add('city', TextType::class, [
@@ -65,7 +82,12 @@ class FestivalType extends AbstractType
                 ],
                 'attr' => [
                     'class' => 'form-control'
-                ]
+                ],
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Veuillez ajouter une description',
+                    ])
+                ],
             ])
             ->add('description', TextareaType::class, [
                 'label' => 'Longue description',
