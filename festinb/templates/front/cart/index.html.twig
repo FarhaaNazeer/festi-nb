@@ -22,7 +22,7 @@
         {% if cart is not null and cart|length != 0 and cart.items|length != 0 %}
 {#            {{ dump(cart.items) }}#}
             {% for item in cart.items %}
-                <div id="cart-container-{{item.uuid}}" class="container_card__item js-cart-item" data-uuid="{{ item.tickets.uuid }}">
+                <div id="cart-container-{{item.uuid}}" class="container_card__item js-cart-item" data-uuid-item="{{item.uuid}}" data-uuid="{{ item.tickets.uuid }}">
                     <li><img src="{{asset('assets/images/LOGO.png')}}" width="100px"></img></li>
                     <li><a href="#">{{ item.tickets.title }}</a></li>
                     <li><a href="#">Quantité</a><input class="qty-item" data-uuid-item="{{item.uuid}}" type="number" id="quantity" value="{{ item.quantity }}" name="quantity" min="1" max="5"></li>
