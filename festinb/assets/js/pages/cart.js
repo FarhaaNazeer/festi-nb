@@ -70,6 +70,12 @@ let cart = () => {
                     totalItemPrice.innerText = `${newTotalItemPrice}`;
                     self.updateTotal();
                   
+                    self.sendRequest('app_front_update_item_qty', {
+                        'ticket': {
+                            'uuid': itemUuid,
+                            'qty': newQty
+                        },
+                    })
                 });
             }
         }
