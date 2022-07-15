@@ -7,10 +7,17 @@ let cart = () => {
 
     let self = {};
     let parser = new DOMParser();
+    let cartBtnValidate = document.querySelector('.js-cart-validate');
+
 
     self.init = () => {
         self.targetBtnAddToCart();
         self.targetCloseModalBtn();
+
+        cartBtnValidate.addEventListener('click', (event) => {
+            let cartUuid = event.target.dataset.cartUuid;
+            self.validateCart(cartUuid)
+        });
     }
 
     self.targetBtnAddToCart = () => {
@@ -25,7 +32,7 @@ let cart = () => {
                     throw new Error('Please add a minimun quantity of 1');
                 }
 
-                let cartUuid = localStorage.getItem('cartUuid');
+                let cartUuid = sessionStorage.getItem('cartUuid');
 
                 if (!cartUuid) {
                     self.createCart(ticketUuid, quantity);
@@ -58,7 +65,7 @@ let cart = () => {
         }).then(function (response) {
                return response.json();
         }).then(function (data){
-            localStorage.setItem('cartUuid', data.uuid);
+            sessionStorage.setItem('cartUuid', data.uuid);
             self.addItemToCart(data.uuid, ticketUuid, quantity);
         });
     }
@@ -90,9 +97,31 @@ let cart = () => {
         });
     }
 
+    self.validateCart = (cartUuid) => {
+
+        document.querySelectorAll('.js-cart-item').forEach((item)=>{
+
+            let itemUuid = item.dataset.uuid;
+            let itemQuantity = item.querySelector('input').value;
+
+            let cart = {
+                'cart' :{
+                    'uuid' : cartUuid
+                },
+                'tickets' :  {
+                    'uuid' : itemUuid,
+                },
+                'quantity' : parseInt(itemQuantity)
+            }
+
+            self.sendRequest('app_front_cart_items_validate', cart);
+            // self.sendRequest('app_front_cart_validate', cart);
+        });
+    };
+
 
     self.sendRequest = async (route, data) => {
-
+        console.log(route);
         let url = Routing.generate(route);
 
         const response = await fetch(url, {
