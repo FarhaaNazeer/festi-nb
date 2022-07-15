@@ -38,28 +38,17 @@ let cart = () => {
                             'uuid': itemUuid,
                         },
                     }).then(function (response) {
-                        const containerCart = document.getElementById('cart-container-'+itemUuid);
-                        containerCart.remove();
-
-                        let itemPrice = parseInt(document.getElementById('item-total-' + itemUuid).innerText);
-
-                        let totalPrice = parseInt(total.innerText);
 
                         let newTotalPrice = totalPrice - itemPrice;
+                        total.textContent = `${newTotalPrice}`;
+                        containerCart.remove();
 
                         if (newTotalPrice == 0) {
-                            document.getElementById('cart-container-total').style.display = 'none';
+                            document.getElementById('container-total').style.display = 'none';
                             let pCartEmpty = document.createElement("p");
                             pCartEmpty.innerHTML = "Aucun article dans ton panier ! Ne perds pas une minute de plus :)";	
-                        
-                            document.getElementById('card-container').appendChild(pCartEmpty);
-                        }
-
-                        total.textContent = `${newTotalPrice}`;
-
-
-
-                        
+                            document.getElementById('container-card').appendChild(pCartEmpty);
+                        }                        
                     });
                 });
             }
