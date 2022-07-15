@@ -1,0 +1,20 @@
+@import '../../../common/abstracts/_variables.scss';
+
+.alert
+{
+  background: red;
+  padding: 0.7em;
+  border-radius: 12px;
+  margin-bottom: 1em;
+  text-align: center;
+  width: 25em;
+  color: $white;
+
+  &-danger {
+    background: $sunyellow;
+  }
+
+  &-success {
+    background: $darkblue;
+  }
+}
