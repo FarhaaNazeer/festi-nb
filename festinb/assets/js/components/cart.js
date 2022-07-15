@@ -7,10 +7,17 @@ let cart = () => {
 
     let self = {};
     let parser = new DOMParser();
+    let cartBtnValidate = document.querySelector('.js-cart-validate');
+
 
     self.init = () => {
         self.targetBtnAddToCart();
         self.targetCloseModalBtn();
+
+        cartBtnValidate.addEventListener('click', (event) => {
+            let cartUuid = event.target.dataset.cartUuid;
+            self.validateCart(cartUuid)
+        });
     }
 
     self.targetBtnAddToCart = () => {
@@ -56,7 +63,7 @@ let cart = () => {
                 'quantity': parseInt(quantity)
             },
         }).then(function (response) {
-            return response.json();
+               return response.json();
         }).then(function (data){
             sessionStorage.setItem('cartUuid', data.uuid);
             self.addItemToCart(data.uuid, ticketUuid, quantity);
@@ -77,7 +84,7 @@ let cart = () => {
             console.log(response);
             return response.json();
         }).then(function (cartItem){
-            return self.sendRequest('app_front_get_cart', cartItem.cart);
+          return self.sendRequest('app_front_get_cart', cartItem.cart);
 
         }).then(function (response){
             return response.json();

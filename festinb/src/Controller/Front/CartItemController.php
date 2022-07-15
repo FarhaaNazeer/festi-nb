@@ -3,7 +3,6 @@
 namespace App\Controller\Front;
 
 use App\DoctrineManager\Cart\DoctrineCartManager;
-use App\Entity\CartItem;
 use App\Manager\Cart\CartItemManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
