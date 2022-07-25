@@ -11,6 +11,13 @@
 {% block javascripts %}
     {{ parent() }}
     {{ encore_entry_script_tags('homepage_slider_js') }}
+    <script>
+        function activeSearch() {
+            let input = document.getElementById('search_bar_form_city');
+            let autocomplete = new google.maps.places.Autocomplete(input);
+        }
+    </script>
+    <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBfE5KH41OopoqY_2czmjsUVN2MvTN2_bc&libraries=places&callback=activeSearch"></script>
 {% endblock %}
 {% block content %}
     {% macro searchBar(formSearch) %}
