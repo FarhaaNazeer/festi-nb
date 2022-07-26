@@ -18,7 +18,6 @@ class FestivalController extends AbstractController
     public function index() : Response
     {
         $festivals = $this->manager->getFestivals();
-//        dd($festivals);
 
         return $this->render('front/festival/index.html.twig', [
             'festivals' => $festivals

@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\CartRepository;
 use App\Traits\EntityIdTrait;
+use App\Traits\StripeTrait;
 use App\Traits\TimestampTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -12,8 +13,18 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: CartRepository::class)]
 class Cart
 {
+    public const STATE_NEW = 'new';
+    public const STATE_PENDING = 'pending';
+    public const STATE_VALIDATE = 'validate';
+
+    public const EUR_CURRENCY = 'eur';
+
+    public const PAYMENT_STRIPE = 'stripe';
+
+
     use EntityIdTrait;
     use TimestampTrait;
+    use StripeTrait;
 
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -40,6 +51,8 @@ class Cart
 
     #[ORM\OneToMany(mappedBy: 'cart', targetEntity: CartItem::class)]
     private $cartItems;
+
+
 
     public function __construct()
     {

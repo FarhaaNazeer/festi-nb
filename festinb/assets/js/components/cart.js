@@ -92,7 +92,6 @@ let cart = () => {
     }
 
     self.sendRequest = async (route, data) => {
-        console.log(route);
         let url = Routing.generate(route);
 
         const response = await fetch(url, {

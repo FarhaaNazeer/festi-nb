@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+{% block title %} Festinb | Adresse {% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('cart_address_scss') }}
+{% endblock %}
+
+{% block content %}
+    {% set userAddresses = cart.userCart.address %}
+
+    <div class="useful-width">
+        <div class="cart-address">
+            {% if 0 == userAddresses|length %}
+                <p>Aucune adresse n'est rattachée à votre compte. <br> Saissez votre adresse à l'aide du formulaire</p>
+            {% else %}
+                <div class="cart-address__loaded">
+                    {% for userAddress in userAddresses %}
+                    {% endfor %}
+                </div>
+            {% endif %}
+            <div class="cart-address__form">
+                <h2>Votre adresse de facturation</h2>
+                {{ form_start(form) }}
+                    {{ form_row(form.street) }}
+                    {{ form_row(form.zipcode) }}
+                    {{ form_row(form.city) }}
+                    {{ form_row(form.country) }}
+                    {{ form_row(form.is_default) }}
+                    <button type="submit" class="btn btn--cart-modal">Enregistrer</button>
+                {{ form_end(form) }}
+            </div>
+{#            <div class="cart-address__cart">#}
+{#                <table>#}
+{#                    <thead>#}
+{#                        <th>Billet</th>#}
+{#                        <th>Qté</th>#}
+{#                        <th>Prix</th>#}
+{#                        <th>Sous total</th>#}
+{#                    </thead>#}
+{#                    <tbody>#}
+{#                    {% for item in cart.cartItems %}#}
+{#                        <tr>#}
+{#                            <td>{{ item.ticket.title }}</td>#}
+{#                            <td>{{ item.quantity }}</td>#}
+{#                            <td>{{ item.itemPrice|number_format(2,'.', '.') }}€</td>#}
+{#                            <td>{{ (item.quantity * item.itemPrice)|number_format(2,'.', '.') }}€</td>#}
+{#                        </tr>#}
+{#                    {% endfor %}#}
+{#                    </tbody>#}
+{#                    <tfoot>#}
+{#                        <tr>#}
+{#                            <th scope="row">Total</th>#}
+{#                            <td colspan="3">{{ cart.amount|number_format(2,'.', '.') }}</td>#}
+{#                        </tr>#}
+{#                    </tfoot>#}
+{#                </table>#}
+{#            </div>#}
+        </div>
+    </div>
+{% endblock %}

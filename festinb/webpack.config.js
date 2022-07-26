@@ -39,6 +39,8 @@ Encore
     .addStyleEntry('homepage_slider_scss', './assets/scss/components/_homepage_slider.scss')
     .addStyleEntry('homepage_search_bar_scss', './assets/scss/components/_homepage_search_bar.scss')
     .addStyleEntry('filters_scss', './assets/scss/components/_filters.scss')
+    .addStyleEntry('stripe_scss', './assets/scss/components/_stripe.scss')
+    .addStyleEntry('cart_address_scss', './assets/scss/pages/_cart_address.scss')
     .addStyleEntry('login_scss', './assets/scss/pages/_login.scss')
     .addStyleEntry('register_scss', './assets/scss/pages/_register.scss')
     .addStyleEntry('festivals_scss', './assets/scss/pages/_festivals.scss')

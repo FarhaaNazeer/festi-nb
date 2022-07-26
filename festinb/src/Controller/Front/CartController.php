@@ -2,8 +2,13 @@
 
 namespace App\Controller\Front;
 
+use App\Entity\Address;
+use App\Entity\Cart;
+use App\Form\CartAddressType;
 use App\Manager\Cart\CartItemManager;
 use App\Manager\Cart\CartManager;
+use App\Repository\CartRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,6 +25,7 @@ class CartController extends AbstractController
     public function __construct(
         public CartManager $cartManager,
         public CartItemManager $cartItemManager,
+        public CartRepository $cartRepository
     ) {
         $this->session = new Session(new NativeSessionStorage(), new AttributeBag());
     }
@@ -87,25 +93,90 @@ class CartController extends AbstractController
         return $this->redirectToRoute('app_front_login');
     }
 
-    #[Route('/cart/validate', name: 'cart_validate', options: ['expose' => true])]
-    public function cartValidate(Request $request)
+    #[Route('/cart/{uuid}/validate', name: 'cart_validate')]
+    public function cartValidate(string $uuid, EntityManagerInterface $em)
     {
-        $content = $request->getContent();
-        $data = json_decode($content, true, JSON_THROW_ON_ERROR);
+        $cart = $this->cartRepository->findOneByUuid($uuid);
 
-        $response = $this->cartManager->validateCart($data);
-
-        if (Response::HTTP_CREATED !== $response[1]) {
-            throw new \Exception('La commande n\'a pas pu être validée', $response[1]);
+        if(!$cart) {
+            throw new \Exception('Cart not found');
         }
 
-        $cart = json_decode($response[0], true);
+        $this->cartManager->assignCart($cart, $this->getUser());
+        $this->cartManager->validateCart($cart);
 
-        return new JsonResponse(
-            $cart,
-            Response::HTTP_OK
-        );
+        $em->flush();
+
+        return $this->redirectToRoute('app_front_cart_address', ['uuid' => $uuid]);
     }
+
+    #[Route('/cart/{uuid}/address', name: 'cart_address')]
+    public function cartAddress(string $uuid, Request $request, EntityManagerInterface $em)
+    {
+        $cart = $this->cartRepository->findOneByUuid($uuid);
+
+        if(!$cart) {
+            throw new \Exception('Cart not found');
+        }
+
+        $address = new Address();
+        $form = $this->createForm(CartAddressType::class, $address);
+
+        if ($request->isMethod('POST')){
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted() && $form->isValid())
+            {
+                $user = $this->getUser();
+                $address->setUserAddress($user);
+                $address->setIsEnable(true);
+
+                $em->persist($address);
+                $em->flush();
+
+                return $this->redirectToRoute('app_front_cart_payment', ['uuid' => $cart->getUuid()]);
+            }
+        }
+
+        return $this->render('front/cart/address.html.twig', [
+            'cart' => $cart,
+            'form' => $form->createView()
+        ]);
+    }
+
+    #[Route('/cart/{uuid}/payment', name: 'cart_payment')]
+    public function cartPayment(string $uuid): Response
+    {
+        $cart = $this->cartRepository->findOneByUuid($uuid);
+
+        if(!$cart) {
+            throw new \Exception('Cart not found');
+        }
+
+        return $this->render('front/cart/payment.html.twig', [
+            'cart' => $cart,
+            'intentSecret' => $this->cartManager->intentSecret($cart)
+        ]);
+    }
+
+    #[Route('/cart/{uuid}/subscription', name: 'cart_subscription')]
+    public function subscription(Cart $cart, Request $request)
+    {
+        if ($request->isMethod('POST')){
+
+            $resource = $this->cartManager->stripe($_POST, $cart);
+
+            if (null !== $resource) {
+
+                $this->cartManager->createSubscription($resource, $cart);
+                return $this->render('front/cart/payment_response.html.twig', [
+                    'response' => 'success',
+                    'cart' => $cart
+                ]);
+            }
+        }
+    }
+
 
     #[Route('/cart/delete', name: 'delete_cart', methods: ['POST'], options: ['expose' => true])]
     public function deleteCartItem(Request $request): Response

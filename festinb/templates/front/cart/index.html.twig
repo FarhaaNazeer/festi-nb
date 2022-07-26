@@ -41,7 +41,7 @@
                 {% if null == app.user %}
                     <a href="{{ path('app_front_cart_redirect') }}" class="btn--cart-modal">Valider</a>
                     {% else %}
-                    <input type="button" id="valid" value="valider" class="js-cart-validate" data-cart-uuid="{{ app.session.get('cartUuid') }}">
+                        <a href="{{ path('app_front_cart_validate', {'uuid' : cart.uuid}) }}" class="btn btn--cart-modal">Valider</a>
                 {% endif %}
             </div>
             {% else %}

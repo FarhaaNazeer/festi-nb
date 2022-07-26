@@ -2,10 +2,11 @@
 
 namespace App\Manager\Cart;
 
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Serializer\SerializerInterface;
+use App\Entity\Cart;
+use App\Entity\User;
+use App\Services\StripeService;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
-use function PHPUnit\Framework\throwException;
 
 class CartManager
 {
@@ -13,6 +14,8 @@ class CartManager
 
     public function __construct(
         private HttpClientInterface $client,
+        protected StripeService $stripeService,
+        private EntityManagerInterface $em
     ) {}
 
     public function getCart(string $uuid)
@@ -48,34 +51,79 @@ class CartManager
         return $response->toArray();
     }
 
-    public function validateCart(array $data)
+    public function assignCart(Cart $cart, User $user)
     {
-        $response = $this->client->request(
-            'PUT',
-            self::ENDPOINT.'validate',
-            [
-                'json' => $data,
-                'headers' => [
-                    'Accept' => 'application/json',
-                ]
-            ]
-        );
+        $cart->setUserCart($user);
+    }
 
-        try {
-            return $response->toArray();
-        } catch (\Exception $e) {
-            throwException($e);
+    public function validateCart(Cart $cart) {
+
+        $cartItems = $cart->getCartItems();
+        $cart->setQuantity(count($cartItems));
+
+        $total = 0;
+
+        foreach ($cartItems as $cartItem) {
+            $subtotal = $cartItem->getItemPrice() * $cartItem->getQuantity();
+            $total += $subtotal;
         }
 
+        $cart->setAmount($total);
+        $cart->setState($cart::STATE_VALIDATE);
     }
 
-    public function update()
+    /**
+     * @param Cart $cart
+     * @return string|null
+     * @throws \Stripe\Exception\ApiErrorException
+     */
+    public function intentSecret(Cart $cart): ?string
     {
-        // TODO: Implement update() method.
+        $intentPayment = $this->stripeService->paymentIntent($cart);
+
+        return $intentPayment['client_secret'] ?? null;
     }
 
-    public function delete()
+    /**
+     * @param array $stripeParams
+     * @param Cart $cart
+     * @return array
+     */
+    public function stripe(array $stripeParams, Cart $cart): array
     {
-        // TODO: Implement delete() method.
+        $resource = null;
+        $data = $this->stripeService->stripeFeedback($stripeParams, $cart);
+
+        if (null !== $data) {
+            $resource = [
+                'stripeBrand' => $data['charges']['data'][0]['payment_method_details']['card']['brand'],
+                'stripeLast4' => $data['charges']['data'][0]['payment_method_details']['card']['last4'],
+                'stripeId' => $data['charges']['data'][0]['id'],
+                'stripeStatus' => $data['charges']['data'][0]['status'],
+                'stripeToken' => $data['client_secret']
+            ];
+        }
+
+        return $resource;
+    }
+
+    /**
+     * @param array $resource
+     * @param Cart $cart
+     * @param User $user
+     * @return void
+     */
+    public function createSubscription(array $resource, Cart $cart)
+    {
+        $cart->setBrandStripe($resource['stripeBrand']);
+        $cart->setIdChargeStripe($resource['stripeId']);
+        $cart->setLast4Stripe($resource['stripeLast4']);
+        $cart->setPaymentMethod(Cart::PAYMENT_STRIPE);
+        $cart->setStripeChargePrice($cart->getAmount());
+        $cart->setStripeStatus($resource['stripeStatus']);
+        $cart->setStripeToken($resource['stripeToken']);
+        $cart->setUpdatedAt(new \DateTime());
+
+        $this->em->flush($cart);
     }
 }

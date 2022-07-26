@@ -1,0 +1,9 @@
+{%  extends 'base.html.twig' %}
+
+{% block title %} Festinb | Réservation confirmée {% endblock %}
+
+{% block content %}
+    {% if response == 'success' %}
+        <p>Bravo ! Votre réservation est bien confirmée :) </p>
+    {% endif %}
+{% endblock %}
